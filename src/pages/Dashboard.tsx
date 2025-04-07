@@ -1,8 +1,8 @@
 import React from "react";import DashboardHeader from "../components/dashboard/DashboardHeader";
-import DashboardCard from "../components/dashboard/DashBoardCard";
 import { MdCalendarToday, MdCloudCircle, MdCreditCard } from "react-icons/md";
 import RecentActivity from "../components/dashboard/RecentActivities";
 import UpcomingPayments from "../components/dashboard/UpcomingPayments";
+import DashboardCard from "../components/dashboard/DashboardCard";
 const Login: React.FC = () => {
   return (
     <div className="w-full ">
