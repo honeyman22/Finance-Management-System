@@ -1,9 +1,5 @@
-import React from 'react'
-
 const Deposit = () => {
-  return (
-    <div>Deposit</div>
-  )
-}
+  return <div>Deposit</div>;
+};
 
-export default Deposit
+export default Deposit;
