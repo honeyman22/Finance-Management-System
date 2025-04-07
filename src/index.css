@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.displaytransation {
+  transition: all 0.6s ease;
+}
+.transition-all {
+  transition: all 0.6s ease; /* Transition all properties over 1 second with an ease timing function */
+}
+.logo-wrapper .img {
+  transition: all 0.6s ease;
+}
+
+/* Maintine modal header design */
+
+.mantine-Modal-header {
+  background-color: #023047 !important; /* Replace with the actual color value of bg-deepNavy */
+  border-bottom: 1px solid #dfe1e6;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
