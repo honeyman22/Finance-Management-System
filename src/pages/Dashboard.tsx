@@ -1,17 +1,18 @@
-import React from "react";import DashboardHeader from "../components/dashboard/DashboardHeader";
+import React from "react";
+import DashboardHeader from "../components/dashboard/DashboardHeader";
 import { MdCalendarToday, MdCloudCircle, MdCreditCard } from "react-icons/md";
 import RecentActivity from "../components/dashboard/RecentActivities";
 import UpcomingPayments from "../components/dashboard/UpcomingPayments";
 import DashboardCard from "../components/dashboard/DashboardCard";
 const Login: React.FC = () => {
   return (
-    <div className="w-full ">
+    <div className="w-full flex flex-col gap-8">
       <DashboardHeader
         onOpenLoanModal={() => console.log("I am here")}
         userName="John Doe"
         onOpenDepositModal={() => console.log("I am here")}
       />
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">
         <DashboardCard
           icon={<MdCloudCircle className="h-6 w-6 text-white" />}
           title="Total Deposits"
@@ -41,7 +42,9 @@ const Login: React.FC = () => {
           bgColor={"bg-yellow-500"}
         />
       </div>
+
       <RecentActivity />
+
       <UpcomingPayments />
     </div>
   );
