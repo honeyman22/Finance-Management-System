@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { Transaction } from "./type";
-import { TransactionRow } from "./TRansactionRow";
+
 import { Pagination } from "@mantine/core";
+import { TransactionRow } from "./Transaction";
 type Props = {
   transactions: Transaction[];
 };

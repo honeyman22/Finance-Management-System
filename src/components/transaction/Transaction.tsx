@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import { TransactionTypeIcon } from "./TransactionTypeIcon";
 import { TransactionStatusBadge } from "./TransactionStatusBadge";
 import { Transaction } from "./type";
