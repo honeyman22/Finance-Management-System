@@ -1,11 +1,16 @@
-import { MdNotifications } from "react-icons/md";const Header = () => {
+import { MdMenu, MdNotifications } from "react-icons/md";
+const Header = ({ setOpen }: { setOpen: () => void }) => {
   return (
-    <header className="bg-gray-800  shadow-sm px-4 py-3 flex items-center justify-between">
-      {/* Left - App Name or User Info */}
-      <div className="text-lg font-semibold text-white">
-        Welcome, <span className="font-bold">Brother Finance</span>
+    <header className="bg-gray-800  shadow-sm px-4 py-3 h-20 flex items-center justify-between">
+      <div className="flex items-center space-x-4">
+        <button onClick={setOpen} className=" text-white">
+          <MdMenu size={32} />
+        </button>
+        {/* Left - App Name or User Info */}
+        <div className="text-lg font-semibold text-white">
+          Welcome, <span className="font-bold">Brother Finance</span>
+        </div>
       </div>
-
       {/* Right - Notification Icon */}
       <div className="relative">
         <button
