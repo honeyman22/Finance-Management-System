@@ -21,4 +21,11 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/*",
+    async lazy() {
+      const PageNotFound = await import("../pages/Pagenotfound");
+      return { Component: PageNotFound.default };
+    },
+  },
 ]);
