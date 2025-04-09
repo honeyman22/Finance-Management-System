@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";import { useNavigate } from "react-router-dom";
 const Sidebar = ({
   isOpen,
   setOpen,
@@ -7,7 +6,7 @@ const Sidebar = ({
   isOpen: boolean;
   setOpen: () => void;
 }) => {
-  // Close mobile menu when resizing to desktop
+  const router = useNavigate();
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1024) setOpen();
@@ -18,10 +17,10 @@ const Sidebar = ({
 
   const handleLogout = () => {
     setTimeout(() => {
-      window.location.href = "/login";
+      router("/login");
     }, 2000);
   };
-  const router = useNavigate();
+
   return (
     <nav
       className={`bg-gray-800 border-r transition-all delay-500 text-white ${
