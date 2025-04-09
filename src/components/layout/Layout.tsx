@@ -1,11 +1,12 @@
-import { Outlet } from "react-router-dom";import Header from "./Header";
+import { Outlet } from "react-router-dom";
+import Header from "./Header";
 import Sidebar from "./Sidebar";
-
-import { useDisclosure } from "@mantine/hooks";
 import { Drawer } from "@mantine/core";
 import useIsMobile from "../../hooks/useIsMobile";
+import { useRecoilState } from "recoil";
+import { layoutAtom } from "../../atom/layout-atom";
 const Layout = () => {
-  const [open, { toggle }] = useDisclosure(false);
+  const [open, setOpen] = useRecoilState(layoutAtom);
 
   const isMobile = useIsMobile();
   return (
@@ -16,18 +17,18 @@ const Layout = () => {
           withCloseButton={false}
           opened={open}
           size="256px"
-          onClose={toggle}
+          onClose={() => setOpen(!open)}
           transitionProps={{ duration: 500 }}
           withinPortal={false}
         >
-          <Sidebar isOpen={open} setOpen={toggle} />
+          <Sidebar isOpen={open} setOpen={() => setOpen(!open)} />
         </Drawer>
       ) : (
-        <Sidebar isOpen={open} setOpen={toggle} />
+        <Sidebar isOpen={open} setOpen={() => setOpen(!open)} />
       )}
 
       <div className=" w-full bg-gray-100">
-        <Header setOpen={toggle} />
+        <Header setOpen={() => setOpen(!open)} />
         <div className="p-5 h-[calc(100vh-5rem)]  overflow-y-auto">
           <Outlet />
         </div>

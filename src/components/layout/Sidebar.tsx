@@ -1,4 +1,6 @@
-import { useEffect } from "react";const Sidebar = ({
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+const Sidebar = ({
   isOpen,
   setOpen,
 }: {
@@ -14,6 +16,12 @@ import { useEffect } from "react";const Sidebar = ({
     return () => window.removeEventListener("resize", handleResize);
   }, [setOpen]);
 
+  const handleLogout = () => {
+    setTimeout(() => {
+      window.location.href = "/login";
+    }, 2000);
+  };
+  const router = useNavigate();
   return (
     <nav
       className={`bg-gray-800 border-r transition-all delay-500 text-white ${
@@ -21,7 +29,6 @@ import { useEffect } from "react";const Sidebar = ({
       }  h-screen`}
     >
       <div className="px-4 py-5">
-        {/* Desktop Navigation */}
         <div className="mt-8 ">
           <ul className="space-y-2">
             {[
@@ -32,13 +39,13 @@ import { useEffect } from "react";const Sidebar = ({
               { label: "Shares", icon: "📈", href: "/shares" },
             ].map((item) => (
               <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="px-4 py-2 rounded-md flex items-center text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"
+                <button
+                  onClick={() => router(item.href)}
+                  className="px-4 w-full py-2 rounded-md flex items-center text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"
                 >
                   <span className="mr-3">{item.icon}</span>{" "}
                   {isOpen && item.label}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
@@ -53,12 +60,12 @@ import { useEffect } from "react";const Sidebar = ({
             >
               <span className="mr-3"> 👤</span> {isOpen && "Profile"}
             </a>{" "}
-            <a
-              href="#logout"
-              className="px-4 py-2 rounded-md flex items-center text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"
+            <button
+              onClick={() => handleLogout()}
+              className="px-4 py-2 w-full rounded-md flex items-center text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"
             >
               <span className="mr-3"> 🚪</span> {isOpen && "Logout"}
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import App from "./App.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { RecoilRoot } from "recoil";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: { staleTime: 1000 * 60 * 60, retry: 1 },
@@ -18,7 +19,11 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <MantineProvider>
-        <App />
+        <RecoilRoot>
+          {" "}
+          <App />
+        </RecoilRoot>
+
         <ToastContainer />
       </MantineProvider>
       <ReactQueryDevtools initialIsOpen={false} />
