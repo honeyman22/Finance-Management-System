@@ -1,6 +1,6 @@
-import ActiveLoansSection from "../components/loan/ActiveLoansSection";
-import AmortizationSchedule from "../components/loan/AmortizationSchedule";
+import ActiveLoansSection from "../components/loan/ActiveLoansSection";import AmortizationSchedule from "../components/loan/AmortizationSchedule";
 import LoanCalculatorCard from "../components/loan/LoanCalculatorCard";
+
 import PaymentHistory from "../components/loan/PaymentHistory";
 const Loan = () => {
   return (
@@ -16,7 +16,6 @@ const Loan = () => {
           remainingPayments="20000"
           totalInterest="2500"
           totalLoanAmount="25000"
-          onViewFullSchedule={() => {}}
         />
         <LoanCalculatorCard />
       </div>
