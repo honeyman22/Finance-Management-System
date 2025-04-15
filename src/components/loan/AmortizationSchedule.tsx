@@ -1,10 +1,11 @@
-import React from "react";interface AmortizationScheduleProps {
+import { useDisclosure } from "@mantine/hooks";import React from "react";
+import AmortizationScheduleModal from "./AmortizationScheduleModal";
+interface AmortizationScheduleProps {
   totalLoanAmount: string;
   monthlyInstallment: string;
   remainingBalance: string;
   remainingPayments: string;
   totalInterest: string;
-  onViewFullSchedule?: () => void;
 }
 
 const AmortizationSchedule: React.FC<AmortizationScheduleProps> = ({
@@ -13,7 +14,6 @@ const AmortizationSchedule: React.FC<AmortizationScheduleProps> = ({
   remainingBalance,
   remainingPayments,
   totalInterest,
-  onViewFullSchedule,
 }) => {
   const items = [
     { label: "Total Loan Amount", value: totalLoanAmount },
@@ -22,6 +22,8 @@ const AmortizationSchedule: React.FC<AmortizationScheduleProps> = ({
     { label: "Remaining Payments", value: remainingPayments },
     { label: "Total Interest", value: totalInterest },
   ];
+
+  const [openDetails, { toggle: toggleDetails }] = useDisclosure();
 
   return (
     <div className="bg-white shadow rounded-lg overflow-hidden">
@@ -53,12 +55,13 @@ const AmortizationSchedule: React.FC<AmortizationScheduleProps> = ({
       <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
         <button
           type="button"
-          className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          onClick={onViewFullSchedule}
+          className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 "
+          onClick={toggleDetails}
         >
           View Full Schedule
         </button>
       </div>
+      <AmortizationScheduleModal open={openDetails} toggle={toggleDetails} />
     </div>
   );
 };
