@@ -29,10 +29,22 @@ export const router = createBrowserRouter([
       },
       {
         path: "/loans",
-        async lazy() {
-          const Loan = await import("../pages/Loan");
-          return { Component: Loan.default };
-        },
+        children: [
+          {
+            index: true,
+            async lazy() {
+              const Loan = await import("../pages/Loan");
+              return { Component: Loan.default };
+            },
+          },
+          {
+            path: "apply-for-loan",
+            async lazy() {
+              const ApplyForLoan = await import("../pages/apply-for-loan");
+              return { Component: ApplyForLoan.default };
+            },
+          },
+        ],
       },
     ],
   },

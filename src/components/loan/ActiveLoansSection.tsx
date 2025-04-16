@@ -1,6 +1,7 @@
-import { Loan } from "../../types";
+import { useNavigate } from "react-router-dom";import { Loan } from "../../types";
 import LoanItem from "./LoanItem";
 const ActiveLoansSection = () => {
+  const router = useNavigate();
   const loans: Loan[] = [
     {
       id: "BF-L-10023",
@@ -12,7 +13,6 @@ const ActiveLoansSection = () => {
       repaymentProgress: 25,
     },
   ];
-
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md mb-8">
       <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
@@ -32,6 +32,7 @@ const ActiveLoansSection = () => {
             <p className="text-sm text-gray-500">No more active loans</p>
             <button
               type="button"
+              onClick={() => router("/loans/apply-for-loan")}
               className="mt-2 inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
               Apply for a New Loan
