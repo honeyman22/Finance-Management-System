@@ -1,4 +1,5 @@
-import React from "react";interface CommonInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+import React from "react";
+interface CommonInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   errors: any;
   register: any;
   label: string;
@@ -23,10 +24,12 @@ const CustomInput = ({
         {...register(id)}
         {...others}
         autoComplete="none"
-        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+        className={`appearance-none block w-full ${
+          errors[`${id}`] && "outline-none  border-red-500"
+        } px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
       />
       {errors[`${id}`] && (
-        <p className="input-error-text font-medium text-red-500  text-xs ">
+        <p className=" font-medium text-red-500  text-xs ">
           {errors[`${id}`].message}
         </p>
       )}
