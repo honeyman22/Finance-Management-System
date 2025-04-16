@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";import { Loan } from "../../types";
+import { useNavigate } from "react-router-dom";
+import { Loan } from "../../types";
 import LoanItem from "./LoanItem";
 const ActiveLoansSection = () => {
   const router = useNavigate();
@@ -14,7 +15,7 @@ const ActiveLoansSection = () => {
     },
   ];
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-md mb-8">
+    <div className="bg-white shadow  overflow-hidden rounded-md mb-8">
       <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
         <div>
           <h2 className="text-lg font-medium text-gray-900">Active Loans</h2>

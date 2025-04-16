@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react";import { Link } from "react-router-dom";
 interface Payment {
   date: string;
   loanId: string;
@@ -38,7 +37,7 @@ const payments: Payment[] = [
 
 const PaymentHistory: React.FC = () => {
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-md">
+    <div className="bg-white shadow overflow-hidden rounded-md">
       <div className="px-4 py-5 sm:px-6">
         <h2 className="text-lg leading-6 font-medium text-gray-900">
           Payment History
