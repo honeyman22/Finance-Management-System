@@ -34,14 +34,14 @@ export const router = createBrowserRouter([
           {
             index: true,
             async lazy() {
-              const Loan = await import("../pages/Loan");
+              const Loan = await import("../pages/loan/loan");
               return { Component: Loan.default };
             },
           },
           {
             path: "apply-for-loan",
             async lazy() {
-              const ApplyForLoan = await import("../pages/apply-for-loan");
+              const ApplyForLoan = await import("../pages/loan/apply-for-loan");
               return { Component: ApplyForLoan.default };
             },
           },
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
             path: "pay-installment/:id",
             async lazy() {
               const PayInstallmentPage = await import(
-                "../pages/pay-installment"
+                "../pages/loan/pay-installment"
               );
               return { Component: PayInstallmentPage.default };
             },

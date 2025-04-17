@@ -1,8 +1,10 @@
-import { yupResolver } from "@hookform/resolvers/yup";import { useForm } from "react-hook-form";
-import { applyForLoanSchema } from "../schema/loan.schema";
-import CustomInput from "../components/common/CustomInput";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
 import { Select } from "@mantine/core";
 import { FaSortDown } from "react-icons/fa";
+import { applyForLoanSchema } from "../../schema/loan.schema";
+import CustomInput from "../../components/common/CustomInput";
 
 const ApplyForLoan = () => {
   const {

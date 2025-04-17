@@ -1,10 +1,11 @@
-import { MdCalendarToday } from "react-icons/md";import DashboardCard from "../components/dashboard/DashboardCard";
-import ActiveLoansSection from "../components/loan/ActiveLoansSection";
-import AmortizationSchedule from "../components/loan/AmortizationSchedule";
-import LoanCalculatorCard from "../components/loan/LoanCalculatorCard";
+import { MdCalendarToday } from "react-icons/md";
 import { FaRegCircleCheck } from "react-icons/fa6";
-import PaymentHistory from "../components/loan/PaymentHistory";
 import { HiOutlineCash } from "react-icons/hi";
+import DashboardCard from "../../components/dashboard/DashboardCard";
+import ActiveLoansSection from "../../components/loan/ActiveLoansSection";
+import PaymentHistory from "../../components/loan/PaymentHistory";
+import AmortizationSchedule from "../../components/loan/AmortizationSchedule";
+import LoanCalculatorCard from "../../components/loan/LoanCalculatorCard";
 const Loan = () => {
   return (
     <div className="flex flex-col gap-8">
