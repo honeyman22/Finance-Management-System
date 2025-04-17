@@ -1,10 +1,12 @@
-import { yupResolver } from "@hookform/resolvers/yup";import { useForm } from "react-hook-form";
-import { payLoanSchema } from "../schema/loan.schema";
-import CustomInput from "../components/common/CustomInput";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import { FaInfoCircle, FaSortDown } from "react-icons/fa";
 import { Divider, Select } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
-import CustomDropzone from "../components/common/CustomDropzone";
+import { payLoanSchema } from "../../schema/loan.schema";
+import CustomInput from "../../components/common/CustomInput";
+import CustomDropzone from "../../components/common/CustomDropzone";
+
 const PayInstallmentPage = () => {
   const {
     formState: { errors },
@@ -107,7 +109,11 @@ const PayInstallmentPage = () => {
                   label="Payment Date"
                   placeholder="Select date"
                   id="date"
-                  error={errors["date"]?.message ?? ""}
+                  error={
+                    errors["date"]?.message
+                      ? String(errors["date"]?.message as any)
+                      : ""
+                  }
                 />
                 <Select
                   label="Payment Method"
@@ -115,15 +121,18 @@ const PayInstallmentPage = () => {
                   data={["Bank Transfor", "Cheque", "Cash", "Others"]}
                   onChange={(value) => setValue("paymentMethod", value ?? "")}
                   rightSection={<FaSortDown className=" mb-2 text-gray-500" />}
-                  error={errors["paymentMethod"]?.message ?? ""}
+                  error={
+                    errors["paymentMethod"]?.message
+                      ? String(errors["paymentMethod"]?.message as any)
+                      : ""
+                  }
                 />
                 <CustomDropzone
                   onDrop={(files: any) => setValue("receipt", files[0])}
                   onReject={(files: any) => setValue("receipt", files[0])}
                   image={watch("receipt")}
                   id="receipt"
-                                  label="Upload Receipt"
-                                  
+                  label="Upload Receipt"
                 />
               </div>
               <div className="flex flex-col gap-1">
