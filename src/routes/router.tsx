@@ -1,4 +1,5 @@
-import { createBrowserRouter, redirect } from "react-router-dom";import Layout from "../components/layout/Layout";
+import { createBrowserRouter, redirect } from "react-router-dom";
+import Layout from "../components/layout/Layout";
 const userLogged = () => {
   return true;
 };
@@ -42,6 +43,15 @@ export const router = createBrowserRouter([
             async lazy() {
               const ApplyForLoan = await import("../pages/apply-for-loan");
               return { Component: ApplyForLoan.default };
+            },
+          },
+          {
+            path: "pay-installment/:id",
+            async lazy() {
+              const PayInstallmentPage = await import(
+                "../pages/pay-installment"
+              );
+              return { Component: PayInstallmentPage.default };
             },
           },
         ],

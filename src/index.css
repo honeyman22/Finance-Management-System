@@ -35,3 +35,11 @@
 .mantine-Select-error {
   @apply font-medium text-red-500  text-xs;
 }
+
+.mantine-DateInput-label {
+  @apply text-sm font-medium text-gray-700 mb-1;
+}
+
+.mantine-DateInput-error {
+  @apply font-medium text-red-500  text-xs;
+}
