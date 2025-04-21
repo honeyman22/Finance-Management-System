@@ -14,15 +14,15 @@ const Header = ({ setOpen }: { setOpen: () => void }) => {
       {/* Right - Notification Icon */}
       <div className="relative">
         <button
-          className="text-gray-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300 p-2 rounded-full"
+          className="text-white  p-2 rounded-full focus:text-gray-800 focus:bg-gray-200 border"
           aria-label="Notifications"
         >
           <MdNotifications className="w-6 h-6" />
         </button>
 
         {/* Notification Badge (optional) */}
-        <span className="absolute top-1 right-1 inline-flex items-center justify-center w-2.5 h-2.5 rounded-full bg-red-500">
-          <span className="sr-only"></span>
+        <span className="absolute -top-1 -right-1 text-white inline-flex items-center text-sm justify-center w-4 h-4 rounded-full bg-red-500">
+          3
         </span>
       </div>
     </header>

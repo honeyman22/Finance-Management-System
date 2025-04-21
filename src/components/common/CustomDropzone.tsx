@@ -27,6 +27,12 @@ const CustomDropzone = ({
             alt="images"
             className="object-cover h-full w-full"
           />
+          <button
+            className="absolute top-2 right-2 bg-white rounded-full p-2"
+            onClick={() => onDrop([])}
+          >
+            <MdClose size={20} />
+          </button>
         </div>
       ) : (
         <Dropzone

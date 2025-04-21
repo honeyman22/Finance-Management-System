@@ -23,10 +23,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "/deposits",
-        async lazy() {
-          const Deposit = await import("../pages/Deposit");
-          return { Component: Deposit.default };
-        },
+        children: [
+          {
+            index: true,
+            async lazy() {
+              const AddDeposit = await import("../pages/deposit/add-deposit");
+              return { Component: AddDeposit.default };
+            },
+          },
+        ],
       },
       {
         path: "/loans",
