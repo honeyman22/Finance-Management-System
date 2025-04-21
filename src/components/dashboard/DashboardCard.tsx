@@ -1,5 +1,4 @@
-import { ReactNode } from "react";
-interface DashboardCardProps {
+import { ReactNode } from "react";interface DashboardCardProps {
   icon: ReactNode;
   title: string;
   value: string;
@@ -9,6 +8,7 @@ interface DashboardCardProps {
   footerLink?: string;
   footerColor?: string;
   bgColor?: string;
+  extra?: ReactNode;
 }
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
@@ -17,9 +17,11 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   value,
   description,
   footerText,
-  footerAction,bgColor,
+  footerAction,
+  bgColor,
   footerLink = "#",
   footerColor = "text-blue-700 hover:text-blue-900",
+  extra,
 }) => {
   return (
     <div className="bg-white overflow-hidden shadow rounded-lg border border-gray-200">
@@ -31,7 +33,11 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         </div>
         <div className="ml-5 w-0 h-14 flex-1">
           <p className="text-sm font-medium text-gray-500 truncate">{title}</p>
-          <p className="text-lg font-medium text-gray-900">{value}</p>
+          <div className="flex gap-2 items-end">
+            {" "}
+            <p className="text-2xl font-medium text-gray-900">{value}</p>
+            {extra}
+          </div>
           {description && (
             <p className="text-sm text-gray-500">{description}</p>
           )}

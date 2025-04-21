@@ -1,6 +1,4 @@
-import { Group, Text } from "@mantine/core";
-import { IoImageOutline } from "react-icons/io5";
-import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { Group, Text } from "@mantine/core";import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { MdClose } from "react-icons/md";
 const CustomDropzone = ({
   image,
@@ -42,22 +40,7 @@ const CustomDropzone = ({
           accept={IMAGE_MIME_TYPE}
           h={220}
         >
-          <Group
-            justify="center"
-            gap="xl"
-            mih={220}
-            style={{ pointerEvents: "none" }}
-          >
-            <Dropzone.Accept>
-              <IoImageOutline size={52} color="var(--mantine-color-blue-6)" />
-            </Dropzone.Accept>
-            <Dropzone.Reject>
-              <MdClose size={52} color="var(--mantine-color-red-6)" />
-            </Dropzone.Reject>
-            <Dropzone.Idle>
-              <IoImageOutline size={52} color="var(--mantine-color-dimmed)" />
-            </Dropzone.Idle>
-
+          <Group gap="xl" mih={220} style={{ pointerEvents: "none" }}>
             <div>
               <Text size="xl" inline>
                 Drag images here or click to select files
