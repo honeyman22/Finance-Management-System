@@ -43,3 +43,7 @@
 .mantine-DateInput-error {
   @apply font-medium text-red-500  text-xs;
 }
+
+.mantine-Tooltip-tooltip {
+  @apply w-[350px] h-auto text-wrap !important;
+}
