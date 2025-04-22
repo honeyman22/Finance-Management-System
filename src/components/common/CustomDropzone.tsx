@@ -1,4 +1,5 @@
-import { Group, Text } from "@mantine/core";import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { Group, Text } from "@mantine/core";
+import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { MdClose } from "react-icons/md";
 const CustomDropzone = ({
   image,
