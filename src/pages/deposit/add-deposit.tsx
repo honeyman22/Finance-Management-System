@@ -1,4 +1,5 @@
-import { yupResolver } from "@hookform/resolvers/yup";import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import { addDepositSchema } from "../../schema/deposit.schema";
 import { FaSortDown } from "react-icons/fa";
 import { Divider, Select, Tooltip } from "@mantine/core";
@@ -125,6 +126,7 @@ const AddDepositPage = () => {
                   image={watch("receipt")}
                   id="receipt"
                   label="Upload Receipt"
+                  errors={errors}
                 />
               </div>
               <div className="flex flex-col gap-1">

@@ -1,5 +1,4 @@
-import { Group, Text } from "@mantine/core";
-import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { Group, Text } from "@mantine/core";import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { MdClose } from "react-icons/md";
 const CustomDropzone = ({
   image,
@@ -7,12 +6,14 @@ const CustomDropzone = ({
   onReject,
   id,
   label,
+  errors,
 }: {
   image?: any;
   onDrop?: any;
   onReject?: any;
   id: string;
   label: string;
+  errors: any;
 }) => {
   return (
     <div className="flex flex-col gap-1">
@@ -53,6 +54,11 @@ const CustomDropzone = ({
             </div>
           </Group>
         </Dropzone>
+      )}
+      {errors[id] && (
+        <p className=" font-medium text-red-500  text-xs ">
+          {errors[id].message}
+        </p>
       )}
     </div>
   );

@@ -1,11 +1,11 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";import { useForm } from "react-hook-form";
 import { FaInfoCircle, FaSortDown } from "react-icons/fa";
 import { Divider, Select } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { payLoanSchema } from "../../schema/loan.schema";
 import CustomInput from "../../components/common/CustomInput";
 import CustomDropzone from "../../components/common/CustomDropzone";
+import CustomTextArea from "../../components/common/CustomTextArea";
 
 const PayInstallmentPage = () => {
   const {
@@ -133,21 +133,16 @@ const PayInstallmentPage = () => {
                   image={watch("receipt")}
                   id="receipt"
                   label="Upload Receipt"
+                  errors={errors}
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <label
-                  htmlFor={"notes"}
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Additional Notes
-                </label>
-                <textarea
-                  id={"notes"}
-                  {...register("notes")}
-                  autoComplete="none"
-                  className="appearance-none resize-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                <CustomTextArea
+                  id="notes"
+                  label=" Additional Notes"
+                  register={register}
                   rows={5}
+                  errors={errors}
                 />
               </div>
               <div className="flex w-full justify-end">
