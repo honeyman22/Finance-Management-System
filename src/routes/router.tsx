@@ -1,5 +1,4 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
-import Layout from "../components/layout/Layout";
+import { createBrowserRouter, redirect } from "react-router-dom";import Layout from "../components/layout/Layout";
 const userLogged = () => {
   return true;
 };
@@ -67,6 +66,13 @@ export const router = createBrowserRouter([
             },
           },
         ],
+      },
+      {
+        path: "/shares",
+        async lazy() {
+          const ShareManagementPage = await import("../pages/shares");
+          return { Component: ShareManagementPage.default };
+        },
       },
     ],
   },

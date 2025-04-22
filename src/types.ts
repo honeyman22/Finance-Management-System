@@ -28,3 +28,13 @@ export interface Loan {
   term: string;
   repaymentProgress: number;
 }
+
+export interface Share {
+  id: number;
+  shareName: string;
+  unitPrice: number;
+  quantity: number;
+  transactionType: string;
+  status: string | null;
+  image: string | null;
+}
