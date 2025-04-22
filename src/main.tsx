@@ -21,10 +21,8 @@ createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <MantineProvider>
         <RecoilRoot>
-          {" "}
           <App />
         </RecoilRoot>
-
         <ToastContainer />
       </MantineProvider>
       <ReactQueryDevtools initialIsOpen={false} />
