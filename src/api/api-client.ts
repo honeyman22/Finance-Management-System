@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError } from "axios";
-const BASE_URL = "http://localhost:3000/api/v1/"; // Change this to your API URL
+const BASE_URL = "https://finance-backend-alc7.onrender.com/api/v1/"; // Change this to your API URL
 export const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   withCredentials: true, // Allows sending cookies
