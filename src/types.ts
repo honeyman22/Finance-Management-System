@@ -1,4 +1,5 @@
-export type PendingItemType = "deposit" | "loan" | "installment";export interface PendingItemData {
+export type PendingItemType = "deposit" | "loan" | "installment";
+export interface PendingItemData {
   id: string;
   type: PendingItemType;
   name: string;
@@ -37,4 +38,16 @@ export interface Share {
   transactionType: string;
   status: string | null;
   image: string | null;
+}
+
+export interface Pagination {
+  page: Page;
+  limit: number;
+}
+
+export interface Page {
+  totalPages: number;
+  currentPage: number;
+  nextPage: any;
+  previousPage: any;
 }

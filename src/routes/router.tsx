@@ -1,5 +1,8 @@
 import { createBrowserRouter, redirect } from "react-router-dom";import Layout from "../components/layout/Layout";
+import Cookies from "js-cookie";
 const userLogged = () => {
+  const token = Cookies.get("token");
+  console.log("Token:", token);
   return true;
 };
 
