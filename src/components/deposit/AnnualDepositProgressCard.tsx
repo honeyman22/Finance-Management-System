@@ -1,23 +1,22 @@
-import { Divider } from "@mantine/core";
-import React from "react";
+import { Divider } from "@mantine/core";import React from "react";
 interface AnnualDepositProgressCardProps {
   year: number;
-  completedMonths: string[]; // e.g., ["Jan", "Feb", ..., "Nov"]
+  completedMonths: number[] | undefined; // e.g., ["Jan", "Feb", ..., "Nov"]
 }
 
 const monthList = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
+  { value: 1, name: "jan" },
+  { value: 2, name: "feb" },
+  { value: 3, name: "mar" },
+  { value: 4, name: "apr" },
+  { value: 5, name: "may" },
+  { value: 6, name: "jun" },
+  { value: 7, name: "jul" },
+  { value: 8, name: "aug" },
+  { value: 9, name: "sep" },
+  { value: 10, name: "oct" },
+  { value: 11, name: "nov" },
+  { value: 12, name: "dec" },
 ];
 
 const AnnualDepositProgressCard: React.FC<AnnualDepositProgressCardProps> = ({
@@ -25,7 +24,7 @@ const AnnualDepositProgressCard: React.FC<AnnualDepositProgressCardProps> = ({
   completedMonths,
 }) => {
   const totalMonths = 12;
-  const completedCount = completedMonths.length;
+  const completedCount = completedMonths?.length ?? 0; // Fallback to 0 if null
   const progressPercent = (completedCount / totalMonths) * 100;
 
   return (
@@ -54,17 +53,17 @@ const AnnualDepositProgressCard: React.FC<AnnualDepositProgressCardProps> = ({
         </div>
         <div className="grid grid-cols-6 gap-2">
           {monthList.map((month) => {
-            const isCompleted = completedMonths.includes(month);
+            const isCompleted = completedMonths?.includes(month.value);
             return (
               <div
-                key={month}
-                className={`h-10 rounded-md flex items-center justify-center text-xs font-medium ${
+                key={month.value}
+                className={`h-10 rounded-md flex capitalize items-center justify-center text-xs font-medium ${
                   isCompleted
                     ? "bg-blue-600 text-white"
                     : "bg-gray-200 text-gray-500"
                 }`}
               >
-                {month}
+                {month?.name}
               </div>
             );
           })}
