@@ -1,4 +1,5 @@
-import { MdAdd } from "react-icons/md";import PageHeader from "../../components/common/PageHeader";
+import { MdAdd } from "react-icons/md";
+import PageHeader from "../../components/common/PageHeader";
 import { useNavigate } from "react-router-dom";
 import DepositReminder from "../../components/deposit/DepositReminder";
 import DepositSummary from "../../components/deposit/DepositSummary";
@@ -50,7 +51,12 @@ const DepositPage = () => {
               {Array(3)
                 .fill("1")
                 .map((_, i) => (
-                  <Skeleton animate={false} key={i + 6} height={350} />
+                  <Skeleton
+                    animate={false}
+                    key={i + 6}
+                    width="100%"
+                    height={350}
+                  />
                 ))}
             </>
           ) : (

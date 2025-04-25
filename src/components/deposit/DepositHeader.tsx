@@ -22,7 +22,7 @@ const DepositHeader = ({
                 key={index + 6}
                 animate={false}
                 height={140}
-                className="col-span-1 lg:col-span-2"
+                className="col-span-1"
               />
             ))}
         </>
