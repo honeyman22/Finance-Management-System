@@ -1,22 +1,21 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { addDepositSchema } from "../../schema/deposit.schema";
-import { FaSortDown } from "react-icons/fa";
-import { Divider, Select, Tooltip } from "@mantine/core";
-import CustomInput from "../../components/common/CustomInput";
-import { DateInput } from "@mantine/dates";
-import CustomDropzone from "../../components/common/CustomDropzone";
+// import { yupResolver } from "@hookform/resolvers/yup";// import { useForm } from "react-hook-form";
+// import { addDepositSchema } from "../../schema/deposit.schema";
+// import { FaSortDown } from "react-icons/fa";
+// import { Divider, Select, Tooltip } from "@mantine/core";
+// import CustomInput from "../../components/common/CustomInput";
+// import { DateInput } from "@mantine/dates";
+// import CustomDropzone from "../../components/common/CustomDropzone";
 
 const AddDepositPage = () => {
-  const {
-    formState: { errors },
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-  } = useForm({
-    resolver: yupResolver(addDepositSchema),
-  });
+  // const {
+  //   formState: { errors },
+  //   register,
+  //   handleSubmit,
+  //   setValue,
+  //   watch,
+  // } = useForm({
+  //   resolver: yupResolver(addDepositSchema),
+  // });
   return (
     <div className="lg:flex w-full lg:items-center lg:p-10 lg:justify-center">
       <div className="bg-white rounded-md">
@@ -34,7 +33,7 @@ const AddDepositPage = () => {
               Submit your monthly deposit of ₹1,000 to continue growing your
               savings
             </p>
-            <form
+            {/* <form
               action=""
               onSubmit={handleSubmit((data) => console.log(data))}
               className="mt-4 w-full flex flex-col gap-4"
@@ -149,7 +148,7 @@ const AddDepositPage = () => {
                   Submit Application
                 </button>
               </div>
-            </form>
+            </form> */}
           </div>
         </div>
       </div>
