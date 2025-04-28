@@ -1,5 +1,4 @@
-import { Deposit } from "../components/transaction/type";
-export const deposits: Deposit[] = [
+import { Deposit } from "../components/transaction/type";export const deposits: Deposit[] = [
   {
     date: "2025-04-01",
     transactionId: "TXN123456",
@@ -21,4 +20,9 @@ export const deposits: Deposit[] = [
     method: "PayPal",
     status: "Rejected",
   },
+];
+
+export const pendingDeposits = [
+  { name: "Rahul Sharma", amount: 1000, submittedDate: "Oct 28, 2024" },
+  { name: "Priya Patel", amount: 1000, submittedDate: "Oct 27, 2024" },
 ];

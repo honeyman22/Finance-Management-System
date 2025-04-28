@@ -1,5 +1,4 @@
-import React from "react";
-import DashboardHeader from "../components/dashboard/DashboardHeader";
+import React from "react";import DashboardHeader from "../components/dashboard/DashboardHeader";
 import { MdCalendarToday, MdCloudCircle, MdCreditCard } from "react-icons/md";
 import RecentActivity from "../components/dashboard/RecentActivities";
 import UpcomingPayments from "../components/dashboard/UpcomingPayments";
@@ -12,6 +11,9 @@ import UserTable from "../components/dashboard/UserTable";
 import ShareTransactionTable from "../components/dashboard/ShareTransactionTable";
 import ActivityLog from "../components/dashboard/ActivityLogs";
 import { Switch } from "@mantine/core";
+import PendingDepositsCard from "../components/dashboard/PendingDepositsCard";
+import { pendingDeposits } from "../utils/depositdata";
+import PendingLoansCard from "../components/dashboard/PendingLoansCard";
 const Login: React.FC = () => {
   const [isUser, setIsUser] = React.useState(false);
   return (
@@ -97,6 +99,14 @@ const Login: React.FC = () => {
           </div>
         </>
       )}
+      <div className="flex flex-col gap-8 md:flex-row">
+        <PendingDepositsCard
+          header="Pending Deposit"
+          deposits={pendingDeposits}
+          type="deposit"
+        />{" "}
+        <PendingLoansCard deposits={pendingDeposits} />
+      </div>
     </div>
   );
 };
