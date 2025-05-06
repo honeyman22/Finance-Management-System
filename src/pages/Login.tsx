@@ -1,10 +1,9 @@
-import CustomInput from "../components/common/CustomInput";
-import { useForm } from "react-hook-form";
+import CustomInput from "../components/common/CustomInput";import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schema/auth.schema";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../api/api-client";
-
+import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const {
@@ -17,7 +16,9 @@ const Login = () => {
   const router = useNavigate();
   const { mutate: loginUser } = useMutation({
     mutationFn: async (data: { email: string; password: string }) => {
-      await api.post("/auth/login", data);
+      const response = await api.post("/auth/login", data);
+      const myData = response.data?.data;
+      Cookies.set("user", myData?.role);
     },
     onSuccess: () => {
       router("/");
