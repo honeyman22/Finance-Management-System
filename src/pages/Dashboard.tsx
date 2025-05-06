@@ -10,25 +10,20 @@ import PendingApprovals from "../components/dashboard/PendingApprovals";
 import UserTable from "../components/dashboard/UserTable";
 import ShareTransactionTable from "../components/dashboard/ShareTransactionTable";
 import ActivityLog from "../components/dashboard/ActivityLogs";
-import { Switch } from "@mantine/core";
 import PendingDepositsCard from "../components/dashboard/PendingDepositsCard";
 import { pendingDeposits } from "../utils/depositdata";
 import PendingLoansCard from "../components/dashboard/PendingLoansCard";
+import Cookies from "js-cookie";
 const Login: React.FC = () => {
-  const [isUser, setIsUser] = React.useState(false);
+  const role = Cookies.get("user");
   return (
     <div className="w-full flex flex-col gap-8">
-      <Switch
-        defaultChecked
-        onChange={() => setIsUser((prev) => !prev)}
-        label="I agree to sell my privacy"
-      />
       <DashboardHeader
         onOpenLoanModal={() => console.log("I am here")}
         userName="John Doe"
         onOpenDepositModal={() => console.log("I am here")}
       />
-      {isUser ? (
+      {role === "user" ? (
         <>
           {" "}
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">
