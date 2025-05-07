@@ -71,6 +71,13 @@ export const router = createBrowserRouter([
         ],
       },
       {
+        path: "/users",
+        async lazy() {
+          const UserPage = await import("../pages/users");
+          return { Component: UserPage.default };
+        },
+      },
+      {
         path: "/shares",
         async lazy() {
           const ShareManagementPage = await import("../pages/shares");
