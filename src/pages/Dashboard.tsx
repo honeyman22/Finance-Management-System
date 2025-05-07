@@ -1,4 +1,5 @@
-import React from "react";import DashboardHeader from "../components/dashboard/DashboardHeader";
+import React from "react";
+import DashboardHeader from "../components/dashboard/DashboardHeader";
 import { MdCalendarToday, MdCloudCircle, MdCreditCard } from "react-icons/md";
 import RecentActivity from "../components/dashboard/RecentActivities";
 import UpcomingPayments from "../components/dashboard/UpcomingPayments";
@@ -14,6 +15,7 @@ import PendingDepositsCard from "../components/dashboard/PendingDepositsCard";
 import { pendingDeposits } from "../utils/depositdata";
 import PendingLoansCard from "../components/dashboard/PendingLoansCard";
 import Cookies from "js-cookie";
+import Barcharts from "../components/dashboard/Barcharts";
 const Login: React.FC = () => {
   const role = Cookies.get("user");
   return (
@@ -23,6 +25,7 @@ const Login: React.FC = () => {
         userName="John Doe"
         onOpenDepositModal={() => console.log("I am here")}
       />
+
       {role === "user" ? (
         <>
           {" "}
@@ -72,6 +75,8 @@ const Login: React.FC = () => {
               <UserTable />
             </div>
             <div className="flex flex-col gap-8 xl:col-span-2">
+              {" "}
+              <Barcharts />
               <ShareTransactionTable
                 transactions={[
                   {

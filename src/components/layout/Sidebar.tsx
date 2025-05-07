@@ -1,4 +1,5 @@
-import { useEffect } from "react";import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const Sidebar = ({
   isOpen,
   setOpen,
@@ -34,7 +35,7 @@ const Sidebar = ({
               { label: "Dashboard", icon: "🏠", href: "/" },
               { label: "Deposits", icon: "💰", href: "/deposits" },
               { label: "Loans", icon: "🏦", href: "/loans" },
-              { label: "Installments", icon: "📅", href: "/installments" },
+              { label: "Users", icon: "👥", href: "/users" },
               { label: "Shares", icon: "📈", href: "/shares" },
             ].map((item) => (
               <li key={item.label}>
