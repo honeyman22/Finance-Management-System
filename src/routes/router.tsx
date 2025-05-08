@@ -1,4 +1,5 @@
-import { createBrowserRouter, redirect } from "react-router-dom";import Layout from "../components/layout/Layout";
+import { createBrowserRouter, redirect } from "react-router-dom";
+import Layout from "../components/layout/Layout";
 import Cookies from "js-cookie";
 const userLogged = () => {
   const token = Cookies.get("user");
@@ -98,6 +99,13 @@ export const router = createBrowserRouter([
     async lazy() {
       const SignUp = await import("../pages/SignUp");
       return { Component: SignUp.default };
+    },
+  },
+  {
+    path: "/reset-password",
+    async lazy() {
+      const ResetPassword = await import("../pages/ResetPassword");
+      return { Component: ResetPassword.default };
     },
   },
   {
