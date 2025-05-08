@@ -1,4 +1,5 @@
-import CustomInput from "../components/common/CustomInput";import { useForm } from "react-hook-form";
+import CustomInput from "../components/common/CustomInput";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schema/auth.schema";
 import { useMutation } from "@tanstack/react-query";
@@ -80,7 +81,7 @@ const Login = () => {
 
             <div className="text-sm">
               <a
-                href="/forget-password"
+                href="/reset-password"
                 className="font-medium text-blue-600 hover:text-blue-500"
               >
                 Forgot your password?
