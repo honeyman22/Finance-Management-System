@@ -1,4 +1,5 @@
-import * as Yup from "yup";export const loginSchema = Yup.object().shape({
+import * as Yup from "yup";
+export const loginSchema = Yup.object().shape({
   email: Yup.string()
     .required("Email is required.")
     .email("Email must be valid.")
@@ -20,10 +21,7 @@ export const registerSchema = Yup.object().shape({
       "Email must be valid."
     ),
   phoneNumber: Yup.string().required("Phone number is required."),
-  password: Yup.string().required("Password is required."),
-  confirmPassword: Yup.string()
-    .required("Confirm Password is required.")
-    .oneOf([Yup.ref("password")], "Passwords must match."),
+  activationDate: Yup.string().required("Activation date is required."),
 });
 
 export const resetPasswordSchema = Yup.object().shape({

@@ -8,7 +8,6 @@ import { sampleItems, transactionData } from "../utils/transactiondata";
 import { TransactionTable } from "../components/transaction/TransactionTable";
 import DashboardSummary from "../components/dashboard/DashboardSummary";
 import PendingApprovals from "../components/dashboard/PendingApprovals";
-import UserTable from "../components/dashboard/UserTable";
 import ShareTransactionTable from "../components/dashboard/ShareTransactionTable";
 import ActivityLog from "../components/dashboard/ActivityLogs";
 import PendingDepositsCard from "../components/dashboard/PendingDepositsCard";
@@ -72,7 +71,6 @@ const Login: React.FC = () => {
                 items={sampleItems}
                 onView={() => console.log("Hello")}
               />
-              <UserTable />
             </div>
             <div className="flex flex-col gap-8 xl:col-span-2">
               {" "}
