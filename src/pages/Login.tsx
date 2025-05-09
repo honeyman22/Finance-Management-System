@@ -5,7 +5,7 @@ import { loginSchema } from "../schema/auth.schema";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../api/api-client";
 import Cookies from "js-cookie";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const {
     formState: { errors },
@@ -63,22 +63,7 @@ const Login = () => {
             register={register}
             type="password"
           />
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
-              </label>
-            </div>
-
+          <div className="flex items-center justify-end">
             <div className="text-sm">
               <a
                 href="/reset-password"
@@ -91,12 +76,6 @@ const Login = () => {
           <button className="bg-blue-600 mt-4 text-white rounded-md px-4 py-2">
             Sign in
           </button>
-        </div>
-        <div className="w-full text-center mt-4">
-          <Link to="/register" className=" text-gray-600 text-sm">
-            Don't have account?{" "}
-            <span className=" text-blue-500 hover:underline">Signup</span>
-          </Link>
         </div>
       </form>
     </div>

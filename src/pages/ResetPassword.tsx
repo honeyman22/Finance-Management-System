@@ -1,5 +1,4 @@
-import { useForm } from "react-hook-form";
-import CustomInput from "../components/common/CustomInput";
+import { useForm } from "react-hook-form";import CustomInput from "../components/common/CustomInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPasswordSchema } from "../schema/auth.schema";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -33,11 +32,11 @@ const ResetPassword = () => {
     },
   });
   return (
-    <div className="flex justify-center bg-gray-50 h-screen items-center p-6">
+    <div className="flex justify-center bg-gray-100 h-screen items-center p-6">
       <form
         onSubmit={handleSubmit((data) => resetPassword(data))}
         action=""
-        className="flex w-full bg-white sm:w-[450px] sm:shadow-sm p-4  rounded-md flex-col mt-5 gap-4"
+        className="flex  w-[28rem] shadow-lg rounded-xl p-8 bg-white sm:w-[450px] sm:shadow-sm  flex-col mt-5 gap-4"
       >
         <h1 className="text-2xl font-semibold text-center text-gray-700">
           Reset Password
