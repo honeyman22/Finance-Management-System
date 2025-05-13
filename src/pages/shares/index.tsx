@@ -1,9 +1,8 @@
-import { MdAdd } from "react-icons/md";
-import PageHeader from "../../components/common/PageHeader";
+import { MdAdd } from "react-icons/md";import PageHeader from "../../components/common/PageHeader";
 import ShareSummary from "../../components/shares/ShareSummary";
-import TransactionModal from "../../components/shares/TransactionModal";
 import { useDisclosure } from "@mantine/hooks";
 import ShareTable from "../../components/shares/ShareTable";
+import RegisterShareModal from "../../components/shares/RegisterShareModal";
 
 const ShareManagementPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -24,7 +23,7 @@ const ShareManagementPage = () => {
       />
       <ShareSummary />
       <ShareTable />
-      <TransactionModal close={close} open={opened} />
+      <RegisterShareModal open={opened} close={close} />
     </div>
   );
 };
