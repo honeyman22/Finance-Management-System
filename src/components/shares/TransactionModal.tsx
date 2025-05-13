@@ -1,17 +1,23 @@
-import { yupResolver } from "@hookform/resolvers/yup";import { Modal, Select } from "@mantine/core";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Modal, Select } from "@mantine/core";
 import { useForm } from "react-hook-form";
 import { shareTransactionSchema } from "../../schema/share.schema";
 import { FaSortDown } from "react-icons/fa";
 import CustomInput from "../common/CustomInput";
 import { DateInput } from "@mantine/dates";
 import CustomDropzone from "../common/CustomDropzone";
-import CustomTextArea from "../common/CustomTextArea";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { api } from "../../api/api-client";
+import { toast } from "react-toastify";
+
 const TransactionModal = ({
   open,
   close,
+  id,
 }: {
   open: boolean;
   close: () => void;
+  id: string;
 }) => {
   const {
     formState: { errors },
@@ -20,6 +26,29 @@ const TransactionModal = ({
     handleSubmit,
     watch,
   } = useForm({ resolver: yupResolver(shareTransactionSchema) });
+
+  const queryClient = useQueryClient();
+
+  const { mutate: recordTransaction } = useMutation({
+    mutationFn: async (data: any) => {
+      await api.post(`/shares/${id}`, {
+        perunitValue: data.perunitValue,
+        quantity: data.quantity,
+        totalAmount: data.totalAmount,
+        transactionDate: data.transactionDate,
+        transactionType: data.transactionType,
+      });
+    },
+    onSuccess: () => {
+      close();
+      queryClient.invalidateQueries({ queryKey: ["shares-list"] });
+      toast.success("Share transaction recorded successfully");
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message ?? "Something went wrong");
+    },
+  });
+
   return (
     <Modal
       withCloseButton={false}
@@ -30,7 +59,7 @@ const TransactionModal = ({
       onClose={close}
     >
       <form
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit((data) => recordTransaction(data))}
         className="flex flex-col gap-4 py-4 "
       >
         <div className="flex flex-col sm:flex-row  gap-4">
@@ -38,7 +67,7 @@ const TransactionModal = ({
             <Select
               label="Loan Purpose"
               placeholder="Select purpose"
-              data={["Purchase", "Sale"]}
+              data={["purchase", "sale"]}
               onChange={(value) => setValue("transactionType", value ?? "")}
               rightSection={<FaSortDown className=" mb-2 text-gray-500" />}
               error={errors["transactionType"]?.message ?? ""}
@@ -62,24 +91,6 @@ const TransactionModal = ({
         <div className="flex flex-col sm:flex-row  gap-4">
           <div className="w-full">
             <CustomInput
-              id="shareName"
-              label="Share Name"
-              errors={errors}
-              register={register}
-            />
-          </div>
-          <div className="w-full">
-            <CustomInput
-              id="unitPrice"
-              label="Price per Share"
-              errors={errors}
-              register={register}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col sm:flex-row  gap-4">
-          <div className="w-full">
-            <CustomInput
               id="quantity"
               label="Quantity"
               errors={errors}
@@ -88,15 +99,21 @@ const TransactionModal = ({
             />
           </div>
           <div className="w-full">
-            <CustomTextArea
-              id="notes"
-              label="Notes"
-              register={register}
-              rows={1}
+            <CustomInput
+              id="perunitValue"
+              label="Price per Share"
               errors={errors}
+              register={register}
             />
           </div>
         </div>
+
+        <CustomInput
+          id="totalAmount"
+          label="Total Payment"
+          errors={errors}
+          register={register}
+        />
 
         <CustomDropzone
           onDrop={(files: any) => setValue("receipt", files[0])}

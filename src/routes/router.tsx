@@ -79,10 +79,24 @@ export const router = createBrowserRouter([
       },
       {
         path: "/shares",
-        async lazy() {
-          const ShareManagementPage = await import("../pages/shares");
-          return { Component: ShareManagementPage.default };
-        },
+        children: [
+          {
+            index: true,
+            async lazy() {
+              const ShareManagementPage = await import("../pages/shares");
+              return { Component: ShareManagementPage.default };
+            },
+          },
+          {
+            path: ":id",
+            async lazy() {
+              const ShareDetailsPage = await import(
+                "../pages/shares/share-details"
+              );
+              return { Component: ShareDetailsPage.default };
+            },
+          },
+        ],
       },
     ],
   },
