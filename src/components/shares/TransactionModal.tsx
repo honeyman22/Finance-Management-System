@@ -1,5 +1,4 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Modal, Select } from "@mantine/core";
+import { yupResolver } from "@hookform/resolvers/yup";import { Modal, Select } from "@mantine/core";
 import { useForm } from "react-hook-form";
 import { shareTransactionSchema } from "../../schema/share.schema";
 import { FaSortDown } from "react-icons/fa";
@@ -31,13 +30,15 @@ const TransactionModal = ({
 
   const { mutate: recordTransaction } = useMutation({
     mutationFn: async (data: any) => {
-      await api.post(`/shares/${id}`, {
-        perunitValue: data.perunitValue,
-        quantity: data.quantity,
-        totalAmount: data.totalAmount,
-        transactionDate: data.transactionDate,
-        transactionType: data.transactionType,
-      });
+      const transactionFormData = new FormData();
+      transactionFormData.append("image", data.receipt);
+      transactionFormData.append("transactionType", data.transactionType);
+      transactionFormData.append("quantity", data.quantity);
+      transactionFormData.append("perunitValue", data.perunitValue);
+      transactionFormData.append("totalAmount", data.totalAmount);
+      transactionFormData.append("transactionDate", data.transactionDate);
+
+      await api.post(`/shares/${id}`, transactionFormData);
     },
     onSuccess: () => {
       close();
