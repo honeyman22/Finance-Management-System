@@ -1,5 +1,4 @@
-import { Modal, Select, Tooltip } from "@mantine/core";
-import CustomDropzone from "../common/CustomDropzone";
+import { Modal, Select, Tooltip } from "@mantine/core";import CustomDropzone from "../common/CustomDropzone";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +6,7 @@ import { addDepositSchema } from "../../schema/deposit.schema";
 import { FaSortDown } from "react-icons/fa";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
+import { toast } from "react-toastify";
 const PayDepositModal = ({
   fine,
   open,
@@ -29,14 +29,20 @@ const PayDepositModal = ({
 
   const { mutate: payDeposit } = useMutation({
     mutationFn: async (data: any) => {
-      await api.put(`/deposit/update/${id}`, {
-        paymentMethod: data.paymentMethod,
-      });
+      console.log(data);
+      const depositFormData = new FormData();
+      depositFormData.append("image", data.receipt);
+      depositFormData.append("depositDate", data.depositDate);
+      depositFormData.append("paymentMethod", data.paymentMethod);
+      await api.put(`/deposit/update/${id}`, depositFormData);
     },
 
     onSuccess: () => {
       close();
-      // show success notification
+      toast.success("Deposit paid successfully");
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message ?? "Something went wrong");
     },
   });
   return (
