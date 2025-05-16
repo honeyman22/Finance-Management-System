@@ -1,4 +1,5 @@
-import { Modal } from "@mantine/core";const DetailsModal = ({
+import { Modal } from "@mantine/core";
+const DetailsModal = ({
   open,
   toggle,
   user,
