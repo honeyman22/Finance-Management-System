@@ -1,23 +1,18 @@
-interface ShareTransaction {  date: string;
-  type: "Purchased" | "Sold";
-  shares: number;
-  value: number;
-}
+import { useQuery } from "@tanstack/react-query";import { api } from "../../api/api-client";
+import { DashBoardSharesResponseBody } from "../../dtos/dashboard.dto";
 
-interface ShareTransactionTableProps {
-  transactions: ShareTransaction[];
-}
-
-const ShareTransactionTable: React.FC<ShareTransactionTableProps> = ({
-  transactions,
-}) => {
+const ShareTransactionTable = () => {
+  const { data } = useQuery({
+    queryKey: ["dashboard-shares-list"],
+    queryFn: () =>
+      api.get<DashBoardSharesResponseBody>(
+        "dashboard/recent-shares-transaction"
+      ),
+  });
   return (
     <div className="bg-white shadow rounded-lg">
       <div className="flex justify-between items-center py-4 border-b px-6 ">
         <h2 className="text-lg font-medium text-gray-900">Share Management</h2>{" "}
-        <button className="text-sm px-3 py-1.5 text-white rounded-md font-medium bg-primary">
-          + Record Transaction
-        </button>
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
@@ -27,7 +22,7 @@ const ShareTransactionTable: React.FC<ShareTransactionTableProps> = ({
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Date
+                Name
               </th>
               <th
                 scope="col"
@@ -39,55 +34,43 @@ const ShareTransactionTable: React.FC<ShareTransactionTableProps> = ({
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Shares
+                Quantity
               </th>
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Value
+                Total
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {transactions.map((transaction, index) => (
+            {data?.data?.data?.map((transaction, index) => (
               <tr key={index + 6}>
                 <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">
-                  {transaction.date}
+                  {transaction.shareName}
                 </td>
                 <td className="px-4 py-2 whitespace-nowrap">
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      transaction.type === "Purchased"
+                      transaction.transactionType === "Purchased"
                         ? "bg-green-100 text-green-800"
                         : "bg-red-100 text-red-800"
                     }`}
                   >
-                    {transaction.type}
+                    {transaction.transactionType}
                   </span>
                 </td>
                 <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">
-                  {transaction.shares}
+                  {transaction.quantity}
                 </td>
                 <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">
-                  ₹{transaction.value}
+                  ₹ {transaction.totalAmount}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
-      <div className="p-4 border-t border-gray-200">
-        <div className="flex justify-between text-sm text-gray-600">
-          <div>
-            Current Shares:{" "}
-            <span className="font-medium text-gray-900">120</span>
-          </div>
-          <div>
-            Total Value:{" "}
-            <span className="font-medium text-gray-900">₹ 4589652</span>
-          </div>
-        </div>
       </div>
     </div>
   );

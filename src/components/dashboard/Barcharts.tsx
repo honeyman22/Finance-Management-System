@@ -1,4 +1,6 @@
-import {  BarChart,
+import { useQuery } from "@tanstack/react-query";
+import {
+  BarChart,
   Bar,
   XAxis,
   YAxis,
@@ -6,29 +8,18 @@ import {  BarChart,
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { api } from "../../api/api-client";
+import { DashBoardAnalysisResponseBody } from "../../dtos/dashboard.dto";
 const Barcharts = () => {
-  const data = [
-    {
-      name: "Deposits",
-      prev_month: 4000,
-      current_month: 2400,
+  const { data: analysisdata } = useQuery({
+    queryKey: ["dashboard"],
+    queryFn: async () => {
+      const response = await api.get<DashBoardAnalysisResponseBody>(
+        "dashboard/analysis"
+      );
+      return response;
     },
-    {
-      name: "Loans",
-      prev_month: 3000,
-      current_month: 1398,
-    },
-    {
-      name: "Interest",
-      prev_month: 2000,
-      current_month: 9800,
-    },
-    {
-      name: "Fines",
-      prev_month: 2780,
-      current_month: 3908,
-    },
-  ];
+  });
   return (
     <div className="bg-white shadow rounded-lg overflow-hidden border border-gray-200">
       <div className="px-4 py-5 border-b ">
@@ -44,7 +35,7 @@ const Barcharts = () => {
           <BarChart
             width={500}
             height={300}
-            data={data}
+            data={analysisdata?.data?.data}
             margin={{
               right: 30,
               left: 20,
@@ -57,13 +48,13 @@ const Barcharts = () => {
             <Legend />
             <Bar
               barSize={20}
-              dataKey="current_month"
+              dataKey="thisMonth"
               name="Current"
               fill="#22c55e"
             />
             <Bar
               barSize={20}
-              dataKey="prev_month"
+              dataKey="lastMonth"
               name="Previous"
               fill="#a855f7"
             />
