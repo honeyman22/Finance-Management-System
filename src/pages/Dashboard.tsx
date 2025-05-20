@@ -73,25 +73,8 @@ const Login: React.FC = () => {
               />
             </div>
             <div className="flex flex-col gap-8 xl:col-span-2">
-              {" "}
               <Barcharts />
-              <ShareTransactionTable
-                transactions={[
-                  {
-                    date: "11/12/2023",
-                    type: "Purchased",
-                    shares: 50,
-                    value: 5000,
-                  },
-                  { date: "10/25/2023", type: "Sold", shares: 25, value: 2750 },
-                  {
-                    date: "10/15/2023",
-                    type: "Purchased",
-                    shares: 100,
-                    value: 10000,
-                  },
-                ]}
-              />{" "}
+              <ShareTransactionTable />
               <ActivityLog />
             </div>
           </div>
