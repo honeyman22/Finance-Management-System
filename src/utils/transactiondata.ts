@@ -1,4 +1,5 @@
-import { Transaction } from "../components/transaction/type";import { PendingItemData, User } from "../types";
+import { Transaction } from "../components/transaction/type";
+import { User } from "../types";
 export const transactionData: Transaction[] = [
   {
     id: "DEP-10534",
@@ -83,33 +84,6 @@ export const transactionData: Transaction[] = [
     approvedBy: "Pending Approval",
     approvalDate: "Pending",
     notes: "Personal loan application - under review",
-  },
-];
-
-export const sampleItems: PendingItemData[] = [
-  {
-    id: "1",
-    type: "deposit",
-    name: "Rahul Sharma",
-    amount: 1000,
-    date: "Nov 12, 2023",
-    status: "pending",
-  },
-  {
-    id: "2",
-    type: "loan",
-    name: "Priya Patel",
-    amount: 20000,
-    date: "Nov 10, 2023",
-    status: "pending",
-  },
-  {
-    id: "3",
-    type: "installment",
-    name: "Amit Kumar",
-    amount: 1330,
-    date: "Nov 11, 2023",
-    status: "pending",
   },
 ];
 

@@ -21,3 +21,19 @@ export interface ShareTransaction {
   perUnitValue: number;
   transactionType: string;
 }
+
+export interface DashBoardPendingApprovalsResponseBody {
+  message: string;
+  data: PendingApprovels[];
+}
+
+export interface PendingApprovels {
+  id: string;
+  amount: number;
+  month: number;
+  fine: number;
+  receipt: any;
+  userName: string;
+  submittedAt: string;
+  type: string;
+}
