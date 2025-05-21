@@ -4,15 +4,15 @@ import { MdCalendarToday, MdCloudCircle, MdCreditCard } from "react-icons/md";
 import RecentActivity from "../components/dashboard/RecentActivities";
 import UpcomingPayments from "../components/dashboard/UpcomingPayments";
 import DashboardCard from "../components/dashboard/DashboardCard";
-import { sampleItems, transactionData } from "../utils/transactiondata";
+import { transactionData } from "../utils/transactiondata";
 import { TransactionTable } from "../components/transaction/TransactionTable";
 import DashboardSummary from "../components/dashboard/DashboardSummary";
 import PendingApprovals from "../components/dashboard/PendingApprovals";
 import ShareTransactionTable from "../components/dashboard/ShareTransactionTable";
-import ActivityLog from "../components/dashboard/ActivityLogs";
-import PendingDepositsCard from "../components/dashboard/PendingDepositsCard";
-import { pendingDeposits } from "../utils/depositdata";
-import PendingLoansCard from "../components/dashboard/PendingLoansCard";
+// import ActivityLog from "../components/dashboard/ActivityLogs";
+// import PendingDepositsCard from "../components/dashboard/PendingDepositsCard";
+// import { pendingDeposits } from "../utils/depositdata";
+// import PendingLoansCard from "../components/dashboard/PendingLoansCard";
 import Cookies from "js-cookie";
 import Barcharts from "../components/dashboard/Barcharts";
 const Login: React.FC = () => {
@@ -67,27 +67,24 @@ const Login: React.FC = () => {
           <DashboardSummary />
           <div className="flex flex-col lg:grid xl:grid-cols-6 gap-8">
             <div className="flex flex-col gap-8 xl:col-span-4">
-              <PendingApprovals
-                items={sampleItems}
-                onView={() => console.log("Hello")}
-              />
+              <PendingApprovals />
             </div>
             <div className="flex flex-col gap-8 xl:col-span-2">
               <Barcharts />
               <ShareTransactionTable />
-              <ActivityLog />
+              {/* <ActivityLog /> */}
             </div>
           </div>
         </>
       )}
-      <div className="flex flex-col gap-8 md:flex-row">
+      {/* <div className="flex flex-col gap-8 md:flex-row">
         <PendingDepositsCard
           header="Pending Deposit"
           deposits={pendingDeposits}
           type="deposit"
         />{" "}
         <PendingLoansCard deposits={pendingDeposits} />
-      </div>
+      </div> */}
     </div>
   );
 };

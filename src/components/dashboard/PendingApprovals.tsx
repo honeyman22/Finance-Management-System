@@ -1,11 +1,15 @@
-import { PendingItemData } from "../../types";import PendingItem from "./PendingItems";
+import { useQuery } from "@tanstack/react-query";import PendingItem from "./PendingItems";
+import { api } from "../../api/api-client";
+import { DashBoardPendingApprovalsResponseBody } from "../../dtos/dashboard.dto";
 
-interface Props {
-  items: PendingItemData[];
-  onView: (id: string) => void;
-}
-
-const PendingApprovals: React.FC<Props> = ({ items, onView }) => {
+const PendingApprovals = () => {
+  const { data: approvalRequests } = useQuery({
+    queryKey: ["pending-approval-requests"],
+    queryFn: () =>
+      api.get<DashBoardPendingApprovalsResponseBody>(
+        "dashboard/pending-approval-requests"
+      ),
+  });
   return (
     <div className="bg-white shadow rounded-md overflow-hidden">
       <div className="px-4 py-5 border-b sm:px-6 flex justify-between items-center">
@@ -18,13 +22,17 @@ const PendingApprovals: React.FC<Props> = ({ items, onView }) => {
           </p>
         </div>
         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-          {items.length} pending
+          {approvalRequests?.data?.data.length} pending
         </span>
       </div>
 
       <ul className="divide-y divide-gray-200">
-        {items.map((item) => (
-          <PendingItem key={item.id} item={item} onView={onView} />
+        {approvalRequests?.data?.data.map((item) => (
+          <PendingItem
+            key={item.id}
+            item={item}
+            onView={() => console.log("Hello")}
+          />
         ))}
 
         <li className="text-center hover:bg-gray-50">

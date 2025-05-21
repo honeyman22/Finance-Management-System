@@ -1,9 +1,9 @@
-import { Avatar } from "@mantine/core";import { PendingItemData } from "../../types";
-import { MdCalendarMonth, MdLockClock } from "react-icons/md";
+import { Avatar } from "@mantine/core";import { MdCalendarMonth, MdLockClock } from "react-icons/md";
 import { useDisclosure } from "@mantine/hooks";
 import PendingDepositDetailsModal from "./PendingDepositDetailsModal";
+import { PendingApprovels } from "../../dtos/dashboard.dto";
 interface Props {
-  item: PendingItemData;
+  item: PendingApprovels;
   onView: (id: string) => void;
 }
 
@@ -25,7 +25,7 @@ const PendingItem: React.FC<Props> = ({ item, onView }) => {
                 {item.type.replace("-", " ")} Approval
               </div>
               <div className="text-sm text-gray-500">
-                {item.name} - ₹{item.amount.toLocaleString()}
+                {item.userName} - ₹{item.amount.toLocaleString()}
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@ const PendingItem: React.FC<Props> = ({ item, onView }) => {
         <div className="mt-2 sm:flex sm:justify-between">
           <div className="flex items-center text-sm text-gray-500">
             <MdCalendarMonth className="mr-1.5 h-5 w-5 text-gray-400" />
-            Submitted on {item.date}
+            Submitted on {item.submittedAt.split("T")[0]}
           </div>
           <div className="mt-2 sm:mt-0 flex items-center text-sm text-yellow-600">
             <MdLockClock className="mr-1.5 h-5 w-5 text-yellow-500" />
