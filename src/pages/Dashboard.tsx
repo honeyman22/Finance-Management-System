@@ -15,7 +15,7 @@ import ShareTransactionTable from "../components/dashboard/ShareTransactionTable
 // import PendingLoansCard from "../components/dashboard/PendingLoansCard";
 import Cookies from "js-cookie";
 import Barcharts from "../components/dashboard/Barcharts";
-import Profile from "./Profile";
+
 const Login: React.FC = () => {
   const role = Cookies.get("user");
   return (
