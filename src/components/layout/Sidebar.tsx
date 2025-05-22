@@ -54,12 +54,12 @@ const Sidebar = ({
         {/* Profile Section - Desktop */}
         <div className="mt-auto  pt-8">
           <div className="border-t border-gray-700 pt-4">
-            <a
-              href="#profile"
-              className="px-4 py-2 rounded-md flex items-center text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"
+            <button
+              onClick={() => router("/profile")}
+              className="px-4 py-2 rounded-md w-full flex items-center text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"
             >
               <span className="mr-3"> 👤</span> {isOpen && "Profile"}
-            </a>{" "}
+            </button>{" "}
             <button
               onClick={() => handleLogout()}
               className="px-4 py-2 w-full rounded-md flex items-center text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"

@@ -1,4 +1,5 @@
-export interface UserResponseBody {  message: string;
+export interface UserResponseBody {
+  message: string;
   pagination: Pagination;
   data: User[];
 }
@@ -27,4 +28,21 @@ export interface User {
   depositDuration: string;
   loanAmount: number;
   loanStatus: any;
+}
+
+export interface ProfileResponseBody {
+  message: string;
+  data: ProfileData;
+}
+
+export interface ProfileData {
+  id: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  activationDate: string;
+  image: string;
+  totalDeposit: number;
+  totalLoan: number;
+  activeLoan: number;
 }

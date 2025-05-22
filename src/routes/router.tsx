@@ -78,6 +78,13 @@ export const router = createBrowserRouter([
         },
       },
       {
+        path: "/profile",
+        async lazy() {
+          const Profile = await import("../pages/Profile");
+          return { Component: Profile.default };
+        },
+      },
+      {
         path: "/shares",
         children: [
           {
