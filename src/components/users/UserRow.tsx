@@ -1,12 +1,15 @@
-import { useDisclosure } from "@mantine/hooks";import DetailsModal from "./DetailsModal";
+import { useDisclosure } from "@mantine/hooks";
+import DetailsModal from "./DetailsModal";
 import ReuseableModal from "../common/ReuseableModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
 import { toast } from "react-toastify";
 import { User } from "../../dtos/users.dto";
+
 const UserRow: React.FC<{ user: User }> = ({ user }) => {
   const [open, { toggle }] = useDisclosure(false);
   const [openDeactivete, { toggle: toggleDeactivate }] = useDisclosure(false);
+
   const queryClient = useQueryClient();
   const { mutate: deactivateUser } = useMutation({
     mutationFn: async () => {
