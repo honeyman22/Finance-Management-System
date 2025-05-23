@@ -1,5 +1,4 @@
-import CustomInput from "../components/common/CustomInput";
-import { useForm } from "react-hook-form";
+import CustomInput from "../components/common/CustomInput";import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schema/auth.schema";
 import { useMutation } from "@tanstack/react-query";
@@ -7,6 +6,7 @@ import { api } from "../api/api-client";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "@mantine/core";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const {
@@ -25,6 +25,12 @@ const Login = () => {
     },
     onSuccess: () => {
       router("/");
+    },
+    onError: (error: any) => {
+      toast.error(
+        error?.response?.data?.message ??
+          "Something went wrong. Please try again later"
+      );
     },
   });
   return (
