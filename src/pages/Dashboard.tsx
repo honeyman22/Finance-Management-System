@@ -10,9 +10,9 @@ import DashboardSummary from "../components/dashboard/DashboardSummary";
 import PendingApprovals from "../components/dashboard/PendingApprovals";
 import ShareTransactionTable from "../components/dashboard/ShareTransactionTable";
 // import ActivityLog from "../components/dashboard/ActivityLogs";
-// import PendingDepositsCard from "../components/dashboard/PendingDepositsCard";
-// import { pendingDeposits } from "../utils/depositdata";
-// import PendingLoansCard from "../components/dashboard/PendingLoansCard";
+import PendingDepositsCard from "../components/dashboard/PendingDepositsCard";
+import { pendingDeposits } from "../utils/depositdata";
+import PendingLoansCard from "../components/dashboard/PendingLoansCard";
 import Cookies from "js-cookie";
 import Barcharts from "../components/dashboard/Barcharts";
 
@@ -78,14 +78,14 @@ const Login: React.FC = () => {
           </div>
         </>
       )}
-      {/* <div className="flex flex-col gap-8 md:flex-row">
+      <div className="flex flex-col gap-8 md:flex-row">
         <PendingDepositsCard
           header="Pending Deposit"
           deposits={pendingDeposits}
           type="deposit"
         />{" "}
         <PendingLoansCard deposits={pendingDeposits} />
-      </div> */}
+      </div>
     </div>
   );
 };

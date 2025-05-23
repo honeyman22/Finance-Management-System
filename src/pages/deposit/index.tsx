@@ -1,4 +1,3 @@
-import { MdAdd } from "react-icons/md";
 import PageHeader from "../../components/common/PageHeader";
 import { useNavigate } from "react-router-dom";
 import DepositReminder from "../../components/deposit/DepositReminder";
@@ -26,15 +25,6 @@ const DepositPage = () => {
       <PageHeader
         title="Deposit Management"
         subtitle="Manage your monthly deposits and track your savings"
-        buttons={[
-          {
-            icon: <MdAdd className="h-6 w-6" />,
-            label: "Make Deposit",
-            onClick: () => {
-              navigate("/deposits/add-deposit");
-            },
-          },
-        ]}
       />
       <DepositHeader
         isLoading={isLoading}

@@ -1,5 +1,4 @@
-export interface UserResponseBody {
-  message: string;
+export interface UserResponseBody {  message: string;
   pagination: Pagination;
   data: User[];
 }
@@ -64,6 +63,7 @@ export interface UserDetails {
 }
 
 export interface Deposit {
+  id: string;
   depositDate: string;
   fine: number;
   amount: number;
