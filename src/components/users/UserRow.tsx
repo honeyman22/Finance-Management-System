@@ -1,12 +1,15 @@
-import { useDisclosure } from "@mantine/hooks";import DetailsModal from "./DetailsModal";
+import { useDisclosure } from "@mantine/hooks";
+import DetailsModal from "./DetailsModal";
 import ReuseableModal from "../common/ReuseableModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
 import { toast } from "react-toastify";
 import { User } from "../../dtos/users.dto";
+import { useNavigate } from "react-router-dom";
 const UserRow: React.FC<{ user: User }> = ({ user }) => {
   const [open, { toggle }] = useDisclosure(false);
   const [openDeactivete, { toggle: toggleDeactivate }] = useDisclosure(false);
+  const router = useNavigate();
   const queryClient = useQueryClient();
   const { mutate: deactivateUser } = useMutation({
     mutationFn: async () => {
@@ -57,7 +60,7 @@ const UserRow: React.FC<{ user: User }> = ({ user }) => {
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
           <button
-            onClick={toggle}
+            onClick={() => router(`/users/${user.id}`)}
             aria-label="View user details"
             className="text-indigo-600 hover:text-indigo-900 mr-3"
           >
