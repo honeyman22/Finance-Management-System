@@ -6,6 +6,8 @@ import { useMutation } from "@tanstack/react-query";
 import { api } from "../api/api-client";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "@mantine/core";
+
 const Login = () => {
   const {
     formState: { errors },
@@ -15,7 +17,7 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
   const router = useNavigate();
-  const { mutate: loginUser } = useMutation({
+  const { mutate: loginUser, isPending } = useMutation({
     mutationFn: async (data: { email: string; password: string }) => {
       const response = await api.post("/auth/login", data);
       const myData = response.data?.data;
@@ -73,8 +75,11 @@ const Login = () => {
               </a>
             </div>
           </div>
-          <button className="bg-blue-600 mt-4 text-white rounded-md px-4 py-2">
-            Sign in
+          <button
+            disabled={isPending}
+            className="bg-blue-600 mt-4 text-white rounded-md px-4 py-2"
+          >
+            {isPending ? <Loader size={16} /> : " Sign in"}
           </button>
         </div>
       </form>
