@@ -15,7 +15,7 @@ const ShareTable = () => {
   });
 
   return (
-    <div className="bg-white shadow overflow-hidden rounded-md mb-8">
+    <div className="bg-white shadow w-full overflow-hidden rounded-md mb-8">
       <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
         <div>
           <h2 className="text-lg leading-6 font-medium text-gray-900">
@@ -26,33 +26,35 @@ const ShareTable = () => {
           </p>
         </div>
       </div>
-      {isLoading || isError ? (
-        <>
+
+      <div className="border-t border-gray-200 overflow-x-auto">
+        {isLoading || isError ? (
+          <>
+            <table className="min-w-full divide-y divide-gray-200">
+              <ShareTableHeader />
+            </table>
+            {Array(10)
+              .fill(0)
+              .map((_, index) => (
+                <Skeleton
+                  key={index + 6}
+                  className="m-0.5"
+                  animate={false}
+                  height={64}
+                />
+              ))}
+          </>
+        ) : (
           <table className="min-w-full divide-y divide-gray-200">
             <ShareTableHeader />
+            <tbody className="bg-white divide-y divide-gray-200">
+              {data?.data?.data?.map((share) => (
+                <ShareRow key={share.id} share={share} />
+              ))}
+            </tbody>
           </table>
-          {Array(10)
-            .fill(0)
-            .map((_, index) => (
-              <Skeleton
-                key={index + 6}
-                className="m-0.5"
-                animate={false}
-                height={64}
-              />
-            ))}
-        </>
-      ) : (
-        <table className="min-w-full divide-y divide-gray-200">
-          <ShareTableHeader />
-          <tbody className="bg-white divide-y divide-gray-200">
-            {data?.data?.data?.map((share) => (
-              <ShareRow key={share.id} share={share} />
-            ))}
-          </tbody>
-        </table>
-      )}
-      <div className="border-t border-gray-200 overflow-x-auto">{}</div>
+        )}
+      </div>
       {(data?.data?.pagination?.page?.totalPages ?? 0) > 1 && (
         <div className="p-4 flex border-t justify-end">
           <Pagination
