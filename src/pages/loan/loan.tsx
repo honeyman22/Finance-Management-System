@@ -7,25 +7,33 @@ import PaymentHistory from "../../components/loan/PaymentHistory";
 import AmortizationSchedule from "../../components/loan/AmortizationSchedule";
 import LoanCalculatorCard from "../../components/loan/LoanCalculatorCard";
 import PageHeader from "../../components/common/PageHeader";
-
+import Cookies from "js-cookie";
 import ApplyLoanModal from "../../components/loan/ApplyLoanModal";
 import { useDisclosure } from "@mantine/hooks";
 
 const Loan = () => {
   const [open, { toggle }] = useDisclosure(false);
+  const role = Cookies.get("user");
   return (
     <div className="flex flex-col gap-8">
-      <PageHeader
-        title="Loan Management"
-        subtitle="Manage your loans and installment payments"
-        buttons={[
-          {
-            label: "Apply for Loan",
-            onClick: () => toggle(),
-            icon: <MdAdd className="h-5 w-5" />,
-          },
-        ]}
-      />
+      {role === "admin" ? (
+        <PageHeader
+          title="Loan Management"
+          subtitle="Manage all loans and installment payments efficiently."
+          buttons={[
+            {
+              label: "Apply for Loan",
+              onClick: () => toggle(),
+              icon: <MdAdd className="h-5 w-5" />,
+            },
+          ]}
+        />
+      ) : (
+        <PageHeader
+          title="Loan Management"
+          subtitle="Manage your loans and installment payments"
+        />
+      )}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">
         <DashboardCard
           icon={<HiOutlineCash className="h-6 w-6 text-white" />}

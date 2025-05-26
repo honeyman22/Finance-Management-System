@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { Loan } from "../../types";
 import LoanItem from "./LoanItem";
 const ActiveLoansSection = () => {
-  const router = useNavigate();
   const loans: Loan[] = [
     {
       id: "BF-L-10023",
@@ -29,7 +27,7 @@ const ActiveLoansSection = () => {
           {loans.map((loan) => (
             <LoanItem key={loan.id} loan={loan} />
           ))}
-          <li className="px-4 py-4 sm:px-6 text-center">
+          {/* <li className="px-4 py-4 sm:px-6 text-center">
             <p className="text-sm text-gray-500">No more active loans</p>
             <button
               type="button"
@@ -38,7 +36,7 @@ const ActiveLoansSection = () => {
             >
               Apply for a New Loan
             </button>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>
