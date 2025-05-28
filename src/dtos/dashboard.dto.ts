@@ -37,3 +37,22 @@ export interface PendingApprovels {
   submittedAt: string;
   type: string;
 }
+
+export interface DashBoardLoanApprovalRequestResponseBody {
+  message: string;
+  data: LoanApprovalRequest[];
+}
+
+export interface LoanApprovalRequest {
+  id: string;
+  amount: number;
+  loanDuration: number;
+  repaymentFrequency: string;
+  status: string;
+  createdAt: string;
+  user: User;
+}
+
+export interface User {
+  fullName: string;
+}

@@ -1,5 +1,4 @@
-import { MdAdd, MdCalendarToday } from "react-icons/md";
-import { FaRegCircleCheck } from "react-icons/fa6";
+import { MdAdd, MdCalendarToday } from "react-icons/md";import { FaRegCircleCheck } from "react-icons/fa6";
 import { HiOutlineCash } from "react-icons/hi";
 import DashboardCard from "../../components/dashboard/DashboardCard";
 import ActiveLoansSection from "../../components/loan/ActiveLoansSection";
@@ -16,7 +15,7 @@ const Loan = () => {
   const role = Cookies.get("user");
   return (
     <div className="flex flex-col gap-8">
-      {role === "admin" ? (
+      {role !== "admin" ? (
         <PageHeader
           title="Loan Management"
           subtitle="Manage all loans and installment payments efficiently."
