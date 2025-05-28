@@ -1,5 +1,4 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { applyForLoanSchema } from "../../schema/loan.schema";
+import { yupResolver } from "@hookform/resolvers/yup";import { applyForLoanSchema } from "../../schema/loan.schema";
 import { useForm } from "react-hook-form";
 import { Modal, Select } from "@mantine/core";
 import { FaSortDown } from "react-icons/fa";
@@ -31,7 +30,7 @@ const ApplyLoanModal = ({
 
   const { mutate: applyForLoan } = useMutation({
     mutationFn: async (data: any) => {
-      await api.post("/loan/apply", {
+      await api.post("/user/loan/apply", {
         amount: parseInt(data.loanAmount),
         repaymentFrequency: data.repaymentFrequency,
         loanDuration: parseInt(data.loanTerm),

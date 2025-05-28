@@ -23,7 +23,7 @@ const CustomDropzone = ({
       {image ? (
         <div className="h-[220px] relative w-full">
           <img
-            src={URL.createObjectURL(image)}
+            src={image instanceof File ? URL.createObjectURL(image) : image}
             alt="images"
             className="object-cover h-full w-full"
           />

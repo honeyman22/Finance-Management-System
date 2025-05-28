@@ -1,4 +1,5 @@
-import { Modal, Select, Tooltip } from "@mantine/core";import CustomDropzone from "../common/CustomDropzone";
+import { Modal, Select, Tooltip } from "@mantine/core";
+import CustomDropzone from "../common/CustomDropzone";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -29,7 +30,6 @@ const PayDepositModal = ({
 
   const { mutate: payDeposit } = useMutation({
     mutationFn: async (data: any) => {
-      console.log(data);
       const depositFormData = new FormData();
       depositFormData.append("image", data.receipt);
       depositFormData.append("depositDate", data.depositDate);

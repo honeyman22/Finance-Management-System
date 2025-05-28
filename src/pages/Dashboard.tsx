@@ -9,15 +9,28 @@ import { TransactionTable } from "../components/transaction/TransactionTable";
 import DashboardSummary from "../components/dashboard/DashboardSummary";
 import PendingApprovals from "../components/dashboard/PendingApprovals";
 import ShareTransactionTable from "../components/dashboard/ShareTransactionTable";
-// import ActivityLog from "../components/dashboard/ActivityLogs";
-import PendingDepositsCard from "../components/dashboard/PendingDepositsCard";
-import { pendingDeposits } from "../utils/depositdata";
 import PendingLoansCard from "../components/dashboard/PendingLoansCard";
 import Cookies from "js-cookie";
 import Barcharts from "../components/dashboard/Barcharts";
+import { api } from "../api/api-client";
+import { DashBoardLoanApprovalRequestResponseBody } from "../dtos/dashboard.dto";
+import { Skeleton } from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
 
 const Login: React.FC = () => {
   const role = Cookies.get("user");
+  const {
+    data: loans,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["pending-loan-requests"],
+    queryFn: () =>
+      api.get<DashBoardLoanApprovalRequestResponseBody>(
+        "dashboard/all-pending-loan-approval-requests"
+      ),
+  });
+
   return (
     <div className="w-full flex flex-col gap-8">
       <DashboardHeader
@@ -69,6 +82,11 @@ const Login: React.FC = () => {
           <div className="flex flex-col lg:grid xl:grid-cols-6 gap-8">
             <div className="flex flex-col gap-8 xl:col-span-4">
               <PendingApprovals />
+              {isLoading || isError ? (
+                <Skeleton height={400} animate={false} />
+              ) : loans?.data?.data?.length === 0 ? null : (
+                <PendingLoansCard loans={loans?.data?.data} />
+              )}
             </div>
             <div className="flex flex-col gap-8 xl:col-span-2">
               <Barcharts />
@@ -78,14 +96,7 @@ const Login: React.FC = () => {
           </div>
         </>
       )}
-      <div className="flex flex-col gap-8 md:flex-row">
-        <PendingDepositsCard
-          header="Pending Deposit"
-          deposits={pendingDeposits}
-          type="deposit"
-        />{" "}
-        <PendingLoansCard deposits={pendingDeposits} />
-      </div>
+      <div className="flex flex-col gap-8 md:flex-row"></div>
     </div>
   );
 };
