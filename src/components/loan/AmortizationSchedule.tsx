@@ -1,11 +1,11 @@
 import { useDisclosure } from "@mantine/hooks";import React from "react";
 import AmortizationScheduleModal from "./AmortizationScheduleModal";
 interface AmortizationScheduleProps {
-  totalLoanAmount: string;
-  monthlyInstallment: string;
-  remainingBalance: string;
-  remainingPayments: string;
-  totalInterest: string;
+  totalLoanAmount: number | undefined;
+  monthlyInstallment: number | undefined;
+  remainingBalance: number | undefined;
+  remainingPayments: number | undefined;
+  totalInterest: number | undefined;
 }
 
 const AmortizationSchedule: React.FC<AmortizationScheduleProps> = ({

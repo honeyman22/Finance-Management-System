@@ -1,17 +1,11 @@
-import { Loan } from "../../types";
 import LoanItem from "./LoanItem";
-const ActiveLoansSection = () => {
-  const loans: Loan[] = [
-    {
-      id: "BF-L-10023",
-      title: "Personal Loan",
-      status: "Active",
-      principal: "\u20B915,000",
-      interestRate: "12%",
-      term: "12 months",
-      repaymentProgress: 25,
-    },
-  ];
+import { ActiveLoan } from "../../dtos/loans.dto";
+
+const ActiveLoansSection = ({
+  activeLoans,
+}: {
+  activeLoans: ActiveLoan[] | undefined;
+}) => {
   return (
     <div className="bg-white shadow  overflow-hidden rounded-md mb-8">
       <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
@@ -24,7 +18,7 @@ const ActiveLoansSection = () => {
       </div>
       <div className="border-t border-gray-200">
         <ul>
-          {loans.map((loan) => (
+          {activeLoans?.map((loan: ActiveLoan) => (
             <LoanItem key={loan.id} loan={loan} />
           ))}
           {/* <li className="px-4 py-4 sm:px-6 text-center">
