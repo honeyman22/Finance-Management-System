@@ -1,17 +1,18 @@
-import { Loan } from "../../types";
+import { useQuery } from "@tanstack/react-query";
 import LoanItem from "./LoanItem";
+import { api } from "../../api/api-client";
+import { ActiveLoanResponseBody } from "../../dtos/loans.dto";
+import Cookies from "js-cookie";
+
 const ActiveLoansSection = () => {
-  const loans: Loan[] = [
-    {
-      id: "BF-L-10023",
-      title: "Personal Loan",
-      status: "Active",
-      principal: "\u20B915,000",
-      interestRate: "12%",
-      term: "12 months",
-      repaymentProgress: 25,
-    },
-  ];
+  const cookie = Cookies.get("user");
+
+  const { data: activeLaon } = useQuery({
+    queryKey: ["active-loans"],
+    queryFn: () =>
+      api.get<ActiveLoanResponseBody>(`${cookie}/loan/active-loans`),
+  });
+
   return (
     <div className="bg-white shadow  overflow-hidden rounded-md mb-8">
       <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
@@ -24,7 +25,7 @@ const ActiveLoansSection = () => {
       </div>
       <div className="border-t border-gray-200">
         <ul>
-          {loans.map((loan) => (
+          {activeLaon?.data?.data?.map((loan) => (
             <LoanItem key={loan.id} loan={loan} />
           ))}
           {/* <li className="px-4 py-4 sm:px-6 text-center">

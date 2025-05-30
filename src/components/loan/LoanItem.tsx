@@ -1,7 +1,8 @@
-import { LuBanknote } from "react-icons/lu";import { Loan } from "../../types";
+import { LuBanknote } from "react-icons/lu";
 import { FaCalendar, FaCheckCircle, FaInfo } from "react-icons/fa";
 import { useDisclosure } from "@mantine/hooks";
 import LoanDetailsModal from "./LoanDetailsModal";
+import { ActiveLoan } from "../../dtos/loans.dto";
 const LoanDetail: React.FC<{ icon: React.ReactNode; text: string }> = ({
   icon,
   text,
@@ -11,8 +12,11 @@ const LoanDetail: React.FC<{ icon: React.ReactNode; text: string }> = ({
     {text}
   </div>
 );
-const LoanItem: React.FC<{ loan: Loan }> = ({ loan }) => {
+const LoanItem: React.FC<{ loan: ActiveLoan }> = ({ loan }) => {
   const [openDetails, { toggle: toggleDetails }] = useDisclosure();
+  const remainingPercent =
+    ((loan.principleAmount - loan.remainingPrinciple) / loan.principleAmount) *
+    100;
   return (
     <li className="border-b border-gray-200 px-4 py-4 sm:px-6">
       <div className="flex items-center justify-between">
@@ -22,7 +26,7 @@ const LoanItem: React.FC<{ loan: Loan }> = ({ loan }) => {
           </div>
           <div className="ml-4">
             <div className="text-sm font-medium text-gray-900">
-              {loan.title}
+              {loan.userName}
             </div>
             <div className="text-sm text-gray-500">Loan ID: {loan.id}</div>
           </div>
@@ -35,12 +39,15 @@ const LoanItem: React.FC<{ loan: Loan }> = ({ loan }) => {
       </div>
       <div className="mt-4 sm:flex items-center  sm:justify-between">
         <div className="sm:flex sm:space-x-6">
-          <LoanDetail icon={<FaInfo />} text={`Principal: ${loan.principal}`} />
+          <LoanDetail
+            icon={<FaInfo />}
+            text={`Principal: ${loan.principleAmount}`}
+          />
           <LoanDetail
             icon={<FaCheckCircle />}
-            text={`Interest Rate: ${loan.interestRate}`}
+            text={`Interest Rate: ${loan.interestRate} %`}
           />
-          <LoanDetail icon={<FaCalendar />} text={`Term: ${loan.term}`} />
+          <LoanDetail icon={<FaCalendar />} text={`Term: ${loan.loanTerm}`} />
         </div>
         <div className="mt-2 sm:mt-0">
           <button
@@ -58,18 +65,22 @@ const LoanItem: React.FC<{ loan: Loan }> = ({ loan }) => {
               Repayment Progress
             </span>
             <span className="text-xs font-semibold text-blue-600">
-              {loan.repaymentProgress}%
+              {remainingPercent}%
             </span>
           </div>
           <div className="overflow-hidden h-2 mt-1 flex rounded bg-blue-100">
             <div
-              style={{ width: `${loan.repaymentProgress}%` }}
+              style={{ width: `${remainingPercent} %` }}
               className="bg-blue-500 text-white text-center text-xs"
             ></div>
           </div>
         </div>
       </div>
-      <LoanDetailsModal open={openDetails} toggle={toggleDetails} />
+      <LoanDetailsModal
+        activeLoan={loan}
+        open={openDetails}
+        toggle={toggleDetails}
+      />
     </li>
   );
 };
