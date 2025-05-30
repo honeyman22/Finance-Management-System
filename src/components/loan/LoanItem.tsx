@@ -70,7 +70,7 @@ const LoanItem: React.FC<{ loan: ActiveLoan }> = ({ loan }) => {
           </div>
           <div className="overflow-hidden h-2 mt-1 flex rounded bg-blue-100">
             <div
-              style={{ width: `${remainingPercent} %` }}
+              style={{ width: `${remainingPercent}%` }}
               className="bg-blue-500 text-white text-center text-xs"
             ></div>
           </div>

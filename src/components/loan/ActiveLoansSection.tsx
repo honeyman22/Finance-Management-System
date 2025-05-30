@@ -1,18 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
 import LoanItem from "./LoanItem";
-import { api } from "../../api/api-client";
-import { ActiveLoanResponseBody } from "../../dtos/loans.dto";
-import Cookies from "js-cookie";
+import { ActiveLoan } from "../../dtos/loans.dto";
 
-const ActiveLoansSection = () => {
-  const cookie = Cookies.get("user");
-
-  const { data: activeLaon } = useQuery({
-    queryKey: ["active-loans"],
-    queryFn: () =>
-      api.get<ActiveLoanResponseBody>(`${cookie}/loan/active-loans`),
-  });
-
+const ActiveLoansSection = ({
+  activeLoans,
+}: {
+  activeLoans: ActiveLoan[] | undefined;
+}) => {
   return (
     <div className="bg-white shadow  overflow-hidden rounded-md mb-8">
       <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
@@ -25,7 +18,7 @@ const ActiveLoansSection = () => {
       </div>
       <div className="border-t border-gray-200">
         <ul>
-          {activeLaon?.data?.data?.map((loan) => (
+          {activeLoans?.map((loan: ActiveLoan) => (
             <LoanItem key={loan.id} loan={loan} />
           ))}
           {/* <li className="px-4 py-4 sm:px-6 text-center">

@@ -1,4 +1,5 @@
-import { MdAdd, MdCalendarToday } from "react-icons/md";import { FaRegCircleCheck } from "react-icons/fa6";
+import { MdAdd, MdCalendarToday } from "react-icons/md";
+import { FaRegCircleCheck } from "react-icons/fa6";
 import { HiOutlineCash } from "react-icons/hi";
 import DashboardCard from "../../components/dashboard/DashboardCard";
 import ActiveLoansSection from "../../components/loan/ActiveLoansSection";
@@ -9,10 +10,18 @@ import PageHeader from "../../components/common/PageHeader";
 import Cookies from "js-cookie";
 import ApplyLoanModal from "../../components/loan/ApplyLoanModal";
 import { useDisclosure } from "@mantine/hooks";
+import { useQuery } from "@tanstack/react-query";
+import { ActiveLoanResponseBody } from "../../dtos/loans.dto";
+import { api } from "../../api/api-client";
 
 const Loan = () => {
   const [open, { toggle }] = useDisclosure(false);
   const role = Cookies.get("user");
+
+  const { data: activeLaon } = useQuery({
+    queryKey: ["active-loans"],
+    queryFn: () => api.get<ActiveLoanResponseBody>(`${role}/loan/active-loans`),
+  });
   return (
     <div className="flex flex-col gap-8">
       {role !== "admin" ? (
@@ -64,20 +73,22 @@ const Loan = () => {
         />
       </div>
       <div className="w-full lg:flex gap-8">
-        <div className="lg:w-2/3">
-          <ActiveLoansSection />
+        <div className={`${role === "admin" ? "w-full" : "w-2/3"}`}>
+          <ActiveLoansSection activeLoans={activeLaon?.data?.data} />
           <PaymentHistory />
         </div>
-        <div className="lg:w-1/3 flex flex-col mt-8 lg:mt-0 gap-8">
-          <AmortizationSchedule
-            monthlyInstallment="5000"
-            remainingBalance="20000"
-            remainingPayments="20000"
-            totalInterest="2500"
-            totalLoanAmount="25000"
-          />
-          <LoanCalculatorCard />
-        </div>
+        {role !== "admin" && (
+          <div className="lg:w-1/3 flex flex-col mt-8 lg:mt-0 gap-8">
+            <AmortizationSchedule
+              monthlyInstallment={activeLaon?.data?.data[0]?.paymentmade}
+              remainingBalance={activeLaon?.data?.data[0].remainingPrinciple}
+              remainingPayments={activeLaon?.data?.data[0].remainingPrinciple}
+              totalInterest={activeLaon?.data?.data[0].remainingPrinciple}
+              totalLoanAmount={activeLaon?.data?.data[0].principleAmount}
+            />
+            <LoanCalculatorCard />
+          </div>
+        )}
       </div>
       <ApplyLoanModal open={open} close={toggle} />
     </div>
