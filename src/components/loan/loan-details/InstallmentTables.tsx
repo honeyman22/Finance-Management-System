@@ -1,24 +1,39 @@
-import React from "react";
-import { api } from "../../api/api-client";
-import { AllLoanResponseBody } from "../../dtos/loans.dto";
+import React from "react";import { useDisclosure } from "@mantine/hooks";
 import Cookies from "js-cookie";
-import { useQuery } from "@tanstack/react-query";
-import ImageViewModal from "../common/ImageViewModal";
-import { useDisclosure } from "@mantine/hooks";
-import { ActionIcon, Pagination } from "@mantine/core";
-import { FiExternalLink } from "react-icons/fi";
+import ImageViewModal from "../../common/ImageViewModal";
+import { PaymentHistory } from "../../../dtos/loan-details.dto";
+import { ActionIcon } from "@mantine/core";
 import { BsEye } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
-
-const PaymentHistory: React.FC = () => {
+const InstallmentTables = ({
+  installments,
+}: {
+  installments: PaymentHistory[];
+}) => {
   const role = Cookies.get("user");
-  const router = useNavigate();
   const [openImage, { toggle: toggleOpenImage }] = useDisclosure(false);
-  const { data: allLoansData } = useQuery({
-    queryKey: ["all-loans"],
-    queryFn: () => api.get<AllLoanResponseBody>(`${role}/loan`),
-  });
   const [image, setImage] = React.useState<string | null>(null);
+  const userHeader = [
+    "Payment Date",
+    "Opening Balance",
+    "Interest",
+    "Principle Paid",
+    "EMI",
+    "Closing Balance",
+    "Receipt",
+    "Status",
+    "Action",
+  ];
+  const AdminHeader = [
+    "Payment Date",
+    "Opening Balance",
+    "Interest",
+    "Principle Paid",
+    "EMI",
+    "Closing Balance",
+    "Receipt",
+    "Status",
+  ];
+  const header = role !== "admin" ? AdminHeader : userHeader;
   return (
     <div className="bg-white shadow overflow-hidden rounded-md">
       <div className="px-4 py-5 sm:px-6">
@@ -34,17 +49,7 @@ const PaymentHistory: React.FC = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              {[
-                "Disbursement Date",
-                "User",
-                "Principal",
-                "Total Interest",
-                "Total fine",
-                "Loan Term",
-                "Receipt",
-                "Status",
-                "Action",
-              ].map((header) => (
+              {header?.map((header) => (
                 <th
                   key={header}
                   scope="col"
@@ -56,25 +61,25 @@ const PaymentHistory: React.FC = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {allLoansData?.data?.data.map((payment, index) => (
+            {installments?.map((payment, index) => (
               <tr key={index + 6}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {payment.disbursementDate.split("T")[0]}
+                  {payment.paymentDate.split("T")[0]}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {payment.userName}
+                  {payment.openingBalance}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {payment.principleAmount}
+                  {payment.interest}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {payment.totalInterest}
+                  {payment.paidPrinciple}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {payment.totalFine}
+                  {payment.emi}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {payment.loanTerm} months
+                  {payment.closingBalance}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   <ActionIcon
@@ -97,27 +102,24 @@ const PaymentHistory: React.FC = () => {
                     {payment.status === "paid" ? "Paid" : "Active"}
                   </span>
                 </td>
-                <td className="px-6 py-4 gap-2 flex items-center whitespace-nowrap ">
-                  <ActionIcon onClick={() => router(`/loans/${payment.id}`)}>
-                    <FiExternalLink />
-                  </ActionIcon>
-                </td>
+                {role !== "user" && (
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex justify-start">
+                      <button className="text-white rounded-md bg-green-500 py-0.5 px-4  hover:bg-green-900 mr-3">
+                        Pay
+                      </button>
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {(allLoansData?.data?.pagination?.page?.totalPages ?? 0) > 1 && (
-        <div className="p-4 flex border-t justify-end">
-          <Pagination
-            total={allLoansData?.data?.pagination?.page?.totalPages ?? 0}
-            gap={0}
-          />
-        </div>
-      )}
+
       <ImageViewModal open={openImage} toggle={toggleOpenImage} image={image} />
     </div>
   );
 };
 
-export default PaymentHistory;
+export default InstallmentTables;

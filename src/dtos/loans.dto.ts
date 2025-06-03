@@ -1,5 +1,7 @@
+import { Pagination } from "../types";
 export interface ActiveLoanResponseBody {
   message: string;
+
   data: ActiveLoan[];
 }
 
@@ -20,6 +22,7 @@ export interface ActiveLoan {
 export interface AllLoanResponseBody {
   message: string;
   data: LoanTableData[];
+  pagination: Pagination;
 }
 
 export interface LoanTableData {

@@ -1,5 +1,4 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
-import Layout from "../components/layout/Layout";
+import { createBrowserRouter, redirect } from "react-router-dom";import Layout from "../components/layout/Layout";
 import Cookies from "js-cookie";
 const userLogged = () => {
   const token = Cookies.get("user");
@@ -51,6 +50,13 @@ export const router = createBrowserRouter([
             async lazy() {
               const Loan = await import("../pages/loan/loan");
               return { Component: Loan.default };
+            },
+          },
+          {
+            path: ":id",
+            async lazy() {
+              const LoanDetails = await import("../pages/loan/loan-details");
+              return { Component: LoanDetails.default };
             },
           },
           {

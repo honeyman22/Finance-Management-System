@@ -1,4 +1,5 @@
-{  "name": "My Finance App",
+{
+  "name": "Brother Finance",
   "short_name": "Finance",
   "start_url": "/",
   "display": "standalone",
