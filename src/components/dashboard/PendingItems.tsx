@@ -4,11 +4,9 @@ import PendingDepositDetailsModal from "./PendingDepositDetailsModal";
 import { PendingApprovels } from "../../dtos/dashboard.dto";
 interface Props {
   item: PendingApprovels;
-  onView: (id: string) => void;
 }
 
-const PendingItem: React.FC<Props> = ({ item, onView }) => {
-  console.log(onView);
+const PendingItem: React.FC<Props> = ({ item }) => {
   const [viewDeposit, { toggle: toggleDeposit }] = useDisclosure();
   return (
     <li className="block hover:bg-gray-50">
@@ -51,6 +49,7 @@ const PendingItem: React.FC<Props> = ({ item, onView }) => {
         deposit={item}
         open={viewDeposit}
         toggle={toggleDeposit}
+        type={item.type}
       />
     </li>
   );

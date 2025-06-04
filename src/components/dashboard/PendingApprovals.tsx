@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";import PendingItem from "./PendingItems";
+import { useQuery } from "@tanstack/react-query";
+import PendingItem from "./PendingItems";
 import { api } from "../../api/api-client";
 import { DashBoardPendingApprovalsResponseBody } from "../../dtos/dashboard.dto";
 
@@ -28,11 +29,7 @@ const PendingApprovals = () => {
 
       <ul className="divide-y divide-gray-200">
         {approvalRequests?.data?.data.map((item) => (
-          <PendingItem
-            key={item.id}
-            item={item}
-            onView={() => console.log("Hello")}
-          />
+          <PendingItem key={item.id} item={item} />
         ))}
 
         <li className="text-center hover:bg-gray-50">
