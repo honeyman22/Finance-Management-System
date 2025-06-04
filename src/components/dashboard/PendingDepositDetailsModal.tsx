@@ -3,7 +3,9 @@ import { PendingApprovels } from "../../dtos/dashboard.dto";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
 import { toast } from "react-toastify";
+
 const PendingDepositDetailsModal = ({
+  type,
   open,
   toggle,
   deposit,
@@ -11,12 +13,20 @@ const PendingDepositDetailsModal = ({
   open: boolean;
   toggle: () => void;
   deposit: PendingApprovels;
+  type: string;
 }) => {
   const { mutate: approve } = useMutation({
     mutationKey: ["pending-approval-requests"],
-    mutationFn: () => api.put(`/admin/deposit/approve-deposit/${deposit.id}`),
+    mutationFn: () =>
+      type === "deposit"
+        ? api.put(`/admin/deposit/approve-deposit/${deposit.id}`)
+        : api.put(`/loan-payment/approve/${deposit.id}`),
     onSuccess: () => {
-      toast.success("Deposit approved successfully");
+      toast.success(
+        `${
+          type === "deposit" ? "Deposit" : "Installment"
+        } approved successfully`
+      );
       toggle();
     },
     onError: (error: any) => {
@@ -26,12 +36,21 @@ const PendingDepositDetailsModal = ({
   const { mutate: reject } = useMutation({
     mutationKey: ["pending-approval-requests"],
     mutationFn: () =>
-      api.put(`/admin/deposit/reject-deposit/${deposit.id}`, {
-        notes:
-          "Document you provide is not proper. Please provide proper document.",
-      }),
+      type === "deposit"
+        ? api.put(`/admin/deposit/reject-deposit/${deposit.id}`, {
+            notes:
+              "Document you provide is not proper. Please provide proper document.",
+          })
+        : api.put(`/loan-payment/reject/${deposit.id}`, {
+            notes:
+              "Document you provide is not proper. Please provide proper document.",
+          }),
     onSuccess: () => {
-      toast.success("Deposit rejected successfully");
+      toast.success(
+        `${
+          type === "deposit" ? "Deposit" : "Installment"
+        } rejected successfully.`
+      );
       toggle();
     },
     onError: (error: any) => {
@@ -41,7 +60,9 @@ const PendingDepositDetailsModal = ({
   return (
     <Modal
       opened={open}
-      title={"Pending Deposit Details"}
+      title={`Pending ${
+        type === "deposit" ? "Deposit" : "Installment"
+      }  Details`}
       centered
       onClose={toggle}
       size={"md"}
@@ -54,7 +75,7 @@ const PendingDepositDetailsModal = ({
             ["Submitted on", deposit.submittedAt.split("T")[0]],
             ["Monthly Deposit", deposit.amount],
             ["Fine", deposit.fine],
-            ["Total Amount", 1000 + (deposit.fine ?? 0)],
+            ["Total Amount", deposit.amount + (deposit.fine ?? 0)],
           ].map(([title, value], idx) => (
             <div className="py-3 flex justify-between text-sm" key={idx + 4}>
               <dt className="text-gray-500">{title}</dt>

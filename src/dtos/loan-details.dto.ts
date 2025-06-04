@@ -1,5 +1,4 @@
-export interface LonDetailsResponseBody {
-  message: string;
+export interface LonDetailsResponseBody {  message: string;
   data: Data;
 }
 
@@ -42,4 +41,5 @@ export interface PaymentHistory {
   fine: number;
   receipt: any;
   paidPrinciple: number;
+  isPaid: boolean;
 }
