@@ -1,9 +1,10 @@
-import { Pagination, Skeleton } from "@mantine/core";import ShareRow from "./ShareRow";
+import { Pagination, Skeleton } from "@mantine/core";
+import ShareRow from "./ShareRow";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
 import React from "react";
-import { ShareListResponseBody } from "../../types/share.dtos";
 import ShareTableHeader from "./ShareTableHeader";
+import { ShareListResponseBody } from "../../dtos/shares.dto";
 const ShareTable = () => {
   const [page, setPage] = React.useState(1);
   const { data, isLoading, isError } = useQuery({
