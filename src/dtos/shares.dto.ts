@@ -36,3 +36,15 @@ export interface SharesListData {
   totalInvestments: number;
   latestTransactionPerUnitValue: number;
 }
+
+export interface ShareSummaryResponseBody {
+  message: string;
+  data: Data;
+}
+
+export interface Data {
+  totalInvestMent: number;
+  totalPurchaseAmount: number;
+  totalSellAmount: number;
+  totalExpenses: number;
+}
