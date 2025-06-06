@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addDepositSchema } from "../../schema/deposit.schema";
 import { FaSortDown } from "react-icons/fa";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
 import { toast } from "react-toastify";
 const PayDepositModal = ({
@@ -28,11 +28,12 @@ const PayDepositModal = ({
     resolver: yupResolver(addDepositSchema),
   });
 
+  const queryClient = useQueryClient();
+
   const { mutate: payDeposit } = useMutation({
     mutationFn: async (data: any) => {
       const depositFormData = new FormData();
       depositFormData.append("image", data.receipt);
-      depositFormData.append("depositDate", data.depositDate);
       depositFormData.append("paymentMethod", data.paymentMethod);
       await api.put(`/deposit/update/${id}`, depositFormData);
     },
@@ -40,6 +41,7 @@ const PayDepositModal = ({
     onSuccess: () => {
       close();
       toast.success("Deposit paid successfully");
+      queryClient.invalidateQueries({ queryKey: ["deposits"] });
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? "Something went wrong");

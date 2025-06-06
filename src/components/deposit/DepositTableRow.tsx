@@ -1,6 +1,6 @@
-import { useDisclosure } from "@mantine/hooks";
-import { DepositData } from "../../dtos/deposits.dto";
+import { useDisclosure } from "@mantine/hooks";import { DepositData } from "../../dtos/deposits.dto";
 import PayDepositModal from "./PayDepositModal";
+import ImageViewModal from "../common/ImageViewModal";
 const statusStyles: Record<string, string> = {
   approved: "bg-green-100 text-green-800",
   pending: "bg-yellow-100 text-yellow-800",
@@ -8,6 +8,8 @@ const statusStyles: Record<string, string> = {
 };
 const DepositTableRow = ({ deposit }: { deposit: DepositData }) => {
   const [openPayModal, { toggle: togglePayModal }] = useDisclosure(false);
+  const [openImageModal, { toggle: toggleOpenImageModal }] =
+    useDisclosure(false);
   return (
     <>
       {" "}
@@ -35,13 +37,16 @@ const DepositTableRow = ({ deposit }: { deposit: DepositData }) => {
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
           {deposit.isPaid ? (
-            <button className="text-indigo-600 hover:text-indigo-900">
+            <button
+              onClick={toggleOpenImageModal}
+              className="bg-green-600 text-sm px-4 py-0.5 rounded-md text-white  hover:bg-green-900 mr-2"
+            >
               View Receipt
             </button>
           ) : (
             <button
               onClick={togglePayModal}
-              className="text-indigo-600 hover:text-indigo-900 mr-2"
+              className="bg-indigo-600 text-sm px-4 py-0.5 rounded-md text-white  hover:bg-indigo-900 mr-2"
             >
               Pay Now
             </button>
@@ -53,6 +58,11 @@ const DepositTableRow = ({ deposit }: { deposit: DepositData }) => {
         fine={deposit.fine}
         close={togglePayModal}
         id={deposit.id}
+      />
+      <ImageViewModal
+        image={deposit.receipt}
+        open={openImageModal}
+        toggle={toggleOpenImageModal}
       />
     </>
   );
