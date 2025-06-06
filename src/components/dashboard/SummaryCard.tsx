@@ -1,10 +1,10 @@
-import React from "react";interface SummaryCardProps {
+import React from "react";import { Link } from "react-router-dom";
+interface SummaryCardProps {
   title: string;
   amount: string;
-  percentage: string;
   icon: React.ReactNode;
   color: "indigo" | "green" | "yellow" | "red";
-  linkText: string;
+  linkText?: string;
   linkHref?: string;
 }
 
@@ -18,11 +18,10 @@ const colorMap = {
 const SummaryCard: React.FC<SummaryCardProps> = ({
   title,
   amount,
-  percentage,
   icon,
   color,
   linkText,
-  linkHref = "#",
+  linkHref,
 }) => {
   return (
     <div className="bg-white overflow-hidden shadow rounded-lg">
@@ -44,43 +43,25 @@ const SummaryCard: React.FC<SummaryCardProps> = ({
                 <div className="text-2xl font-semibold text-gray-900">
                   {amount}
                 </div>
-                <div
-                  className={`ml-2 flex items-baseline text-sm font-semibold ${
-                    colorMap[color].split(" ")[1]
-                  }`}
-                >
-                  <svg
-                    className="self-center flex-shrink-0 h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span className="sr-only">Changed by</span>
-                  {percentage}
-                </div>
               </dd>
             </dl>
           </div>
         </div>
       </div>
-      <div className="bg-gray-50 px-5 py-3">
-        <div className="text-sm">
-          <a
-            href={linkHref}
-            className={`font-medium ${colorMap[color].split(" ")[1]} ${
-              colorMap[color].split(" ")[2]
-            }`}
-          >
-            {linkText}
-          </a>
+      {linkText && linkHref && (
+        <div className="bg-gray-50 px-5 py-3">
+          <div className="text-sm">
+            <Link
+              to={linkHref}
+              className={`font-medium ${colorMap[color].split(" ")[1]} ${
+                colorMap[color].split(" ")[2]
+              }`}
+            >
+              {linkText}
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

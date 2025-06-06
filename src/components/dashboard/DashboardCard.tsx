@@ -19,7 +19,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   footerText,
   footerAction,
   bgColor,
-  footerLink = "#",
+  footerLink,
   footerColor = "text-blue-700 hover:text-blue-900",
   extra,
 }) => {

@@ -1,6 +1,6 @@
 import { Modal } from "@mantine/core";
 import { PendingApprovels } from "../../dtos/dashboard.dto";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
 import { toast } from "react-toastify";
 
@@ -15,6 +15,7 @@ const PendingDepositDetailsModal = ({
   deposit: PendingApprovels;
   type: string;
 }) => {
+  const queryClient = useQueryClient();
   const { mutate: approve } = useMutation({
     mutationKey: ["pending-approval-requests"],
     mutationFn: () =>
@@ -28,6 +29,9 @@ const PendingDepositDetailsModal = ({
         } approved successfully`
       );
       toggle();
+      queryClient.invalidateQueries({
+        queryKey: ["pending-approval-requests"],
+      });
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? "Something went wrong");
@@ -52,6 +56,9 @@ const PendingDepositDetailsModal = ({
         } rejected successfully.`
       );
       toggle();
+      queryClient.invalidateQueries({
+        queryKey: ["pending-approval-requests"],
+      });
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? "Something went wrong");

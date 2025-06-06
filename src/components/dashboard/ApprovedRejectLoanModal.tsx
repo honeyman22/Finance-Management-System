@@ -1,5 +1,4 @@
-import { Modal } from "@mantine/core";
-import CustomDropzone from "../common/CustomDropzone";
+import { Modal } from "@mantine/core";import CustomDropzone from "../common/CustomDropzone";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { acceptRejectLoanSchema } from "../../schema/loan.schema";
@@ -36,7 +35,7 @@ const ApprovedRejectLoanModal = ({
       const formData = new FormData();
       formData.append("image", data.receipt);
       await api.put(
-        `/loan/${status.toLowerCase()}/${loanId}`,
+        `admin/loan/${status.toLowerCase()}/${loanId}`,
         status === "Approve"
           ? formData
           : {

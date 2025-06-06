@@ -1,8 +1,10 @@
-import { Pagination, Skeleton } from "@mantine/core";import React from "react";
+import { Pagination, Skeleton } from "@mantine/core";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
 import { DepositTableDataRoot } from "../../dtos/deposits.dto";
 import DepositTableRow from "./DepositTableRow";
+import Cookies from "js-cookie";
 
 const DepositTableHeader = () => {
   return (
@@ -33,6 +35,7 @@ const DepositTableHeader = () => {
 };
 const DepositHistoryTable: React.FC = () => {
   const [page, setPage] = React.useState(1);
+  const role = Cookies.get("user");
   const {
     data: deposits,
     isLoading,
@@ -40,7 +43,10 @@ const DepositHistoryTable: React.FC = () => {
   } = useQuery<DepositTableDataRoot>({
     queryKey: ["deposits", page],
     queryFn: async () => {
-      const response = await api.get("deposit", { params: { page } });
+      const response =
+        role === "admin"
+          ? await api.get("admin/deposit", { params: { page } })
+          : await api.get("deposit", { params: { page } });
       return response?.data;
     },
   });
