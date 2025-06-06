@@ -1,4 +1,5 @@
-import { MdAdd, MdCalendarToday } from "react-icons/md";import { FaRegCircleCheck } from "react-icons/fa6";
+import { MdAdd, MdCalendarToday } from "react-icons/md";
+import { FaRegCircleCheck } from "react-icons/fa6";
 import { HiOutlineCash } from "react-icons/hi";
 import DashboardCard from "../../components/dashboard/DashboardCard";
 import ActiveLoansSection from "../../components/loan/ActiveLoansSection";
@@ -38,7 +39,7 @@ const Loan = () => {
       ) : (
         <PageHeader
           title="Loan Management"
-          subtitle="Manage your loans and installment payments"
+          subtitle="Manage all loans and installment payments efficiently."
         />
       )}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">
@@ -75,7 +76,6 @@ const Loan = () => {
         <div className={`${role === "admin" ? "w-full" : "w-full lg:w-2/3 "}`}>
           <ActiveLoansSection activeLoans={activeLaon?.data?.data} />
           <PaymentHistory />
-          
         </div>
         {role !== "admin" && (
           <div className="lg:w-1/3 flex flex-col mt-8 lg:mt-0 gap-8">

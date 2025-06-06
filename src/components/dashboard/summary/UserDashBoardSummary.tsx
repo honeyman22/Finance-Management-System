@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";import { api } from "../../api/api-client";
-import { UserDashboardResponseBody } from "../../dtos/dashboard.dto";
-import DashboardCard from "./DashboardCard";
+import { useQuery } from "@tanstack/react-query";import { api } from "../../../api/api-client";
+import { UserDashboardResponseBody } from "../../../dtos/dashboard.dto";
+import DashboardCard from "../DashboardCard";
 import { MdCalendarToday, MdCloudCircle, MdCreditCard } from "react-icons/md";
 import { Skeleton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import PayInstallments from "../loan/loan-details/PayInstallmentModal";
+import PayInstallments from "../../loan/loan-details/PayInstallmentModal";
 const UserDashBoardSummary = () => {
   const {
     data: dashboardSummary,
@@ -42,7 +42,8 @@ const UserDashBoardSummary = () => {
             value={`रु. ${
               dashboardSummary?.data?.data?.approvedLoan?.principleAmount ?? 0
             }`}
-            footerText={`/loans/${dashboardSummary?.data?.data?.approvedLoan?.id}`}
+            footerText="View details"
+            footerLink={`/loans/${dashboardSummary?.data?.data?.approvedLoan?.id}`}
             footerColor="text-green-700 hover:text-green-900"
             bgColor={"bg-green-700"}
           />

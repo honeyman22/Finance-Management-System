@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";import { api } from "../../api/api-client";
-import { DashBoardSummaryResponseBody } from "../../dtos/dashboard.dto";
-import SummaryCard from "./SummaryCard";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "../../../api/api-client";
+import { DashBoardSummaryResponseBody } from "../../../dtos/dashboard.dto";
+import SummaryCard from "../SummaryCard";
 import { Skeleton } from "@mantine/core";
 
 const DashboardSummary = () => {
