@@ -1,5 +1,4 @@
-export interface DashBoardAnalysisResponseBody {
-  message: string;
+export interface DashBoardAnalysisResponseBody {  message: string;
   data: Data[];
 }
 
@@ -82,4 +81,27 @@ export interface AdminSummary {
   totalApprovedLoan: number;
   totalFine: number;
   totalInterest: number;
+}
+
+export interface UserDashboardResponseBody {
+  message: string;
+  data: UserSummary;
+}
+
+export interface UserSummary {
+  totalDeposit: number;
+  approvedLoan: ApprovedLoan;
+  installement: Installement;
+}
+
+export interface ApprovedLoan {
+  id: string;
+  principleAmount: number;
+}
+
+export interface Installement {
+  date: string;
+  amount: number;
+  id: string;
+  fine: number;
 }
