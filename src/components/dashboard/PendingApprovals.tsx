@@ -1,16 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
-import PendingItem from "./PendingItems";
+import { useQuery } from "@tanstack/react-query";import PendingItem from "./PendingItems";
 import { api } from "../../api/api-client";
 import { DashBoardPendingApprovalsResponseBody } from "../../dtos/dashboard.dto";
+import { Skeleton } from "@mantine/core";
 
 const PendingApprovals = () => {
-  const { data: approvalRequests } = useQuery({
+  const {
+    data: approvalRequests,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["pending-approval-requests"],
     queryFn: () =>
       api.get<DashBoardPendingApprovalsResponseBody>(
         "dashboard/pending-approval-requests"
       ),
   });
+  if (!approvalRequests) return null;
+  if (isLoading || isError) return <Skeleton height={200} />;
+  if (approvalRequests?.data?.data.length === 0) return null;
   return (
     <div className="bg-white shadow rounded-md overflow-hidden">
       <div className="px-4 py-5 border-b sm:px-6 flex justify-between items-center">
@@ -31,17 +38,6 @@ const PendingApprovals = () => {
         {approvalRequests?.data?.data.map((item) => (
           <PendingItem key={item.id} item={item} />
         ))}
-
-        <li className="text-center hover:bg-gray-50">
-          <div className="px-4 py-4 sm:px-6">
-            <button
-              onClick={() => console.log("View all pending approvals clicked")}
-              className="text-sm font-medium text-indigo-600 hover:text-indigo-500 bg-transparent border-none cursor-pointer"
-            >
-              View all pending approvals &rarr;
-            </button>
-          </div>
-        </li>
       </ul>
     </div>
   );

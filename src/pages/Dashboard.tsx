@@ -1,5 +1,4 @@
-import React from "react";
-import DashboardHeader from "../components/dashboard/DashboardHeader";
+import React from "react";import DashboardHeader from "../components/dashboard/DashboardHeader";
 import { MdCalendarToday, MdCloudCircle, MdCreditCard } from "react-icons/md";
 import RecentActivity from "../components/dashboard/RecentActivities";
 import UpcomingPayments from "../components/dashboard/UpcomingPayments";
@@ -96,7 +95,7 @@ const Login: React.FC = () => {
           </div>
         </>
       )}
-      <div className="flex flex-col gap-8 md:flex-row"></div>
+      <RecentActivity />
     </div>
   );
 };

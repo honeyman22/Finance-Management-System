@@ -56,3 +56,30 @@ export interface LoanApprovalRequest {
 export interface User {
   fullName: string;
 }
+
+export interface RecentActivityResponseBody {
+  message: string;
+  data: RecentActivity[];
+}
+
+export interface RecentActivity {
+  id: string;
+  userId: string;
+  type: string;
+  amount: number;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface DashBoardSummaryResponseBody {
+  message: string;
+  data: AdminSummary;
+}
+
+export interface AdminSummary {
+  totalDeposit: number;
+  totalApprovedLoan: number;
+  totalFine: number;
+  totalInterest: number;
+}
