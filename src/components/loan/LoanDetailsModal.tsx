@@ -14,17 +14,17 @@ const LoanDetailsModal = ({
       <div className="mt-5 border-t border-gray-200 pt-4">
         <dl className="divide-y divide-gray-200">
           {[
-            ["Principal Amount", activeLoan.principleAmount],
-            ["Disbursement Date", activeLoan.disbursementDate.split("T")[0]],
-            ["Loan Term", `${activeLoan.loanTerm} months`],
-            ["Interest Rate", `${activeLoan.interestRate} % per annum`],
-            ["Monthly Installment", activeLoan.emi],
+            ["Principal Amount", activeLoan?.principleAmount],
+            ["Disbursement Date", activeLoan?.disbursementDate?.split("T")[0]],
+            ["Loan Term", `${activeLoan?.loanTerm} months`],
+            ["Interest Rate", `${activeLoan?.interestRate} % per annum`],
+            ["Monthly Installment", activeLoan?.emi],
             [
               "Payments Made",
-              `${activeLoan.paymentmade} of ${activeLoan.loanTerm}`,
+              `${activeLoan?.paymentmade} of ${activeLoan?.loanTerm}`,
             ],
-            ["Remaining Principal", activeLoan.remainingPrinciple],
-            ["Next Payment Due", activeLoan.nextPaymentDate.split("T")[0]],
+            ["Remaining Principal", activeLoan?.remainingPrinciple],
+            ["Next Payment Due", activeLoan?.nextPaymentDate?.split("T")[0]],
             ["Loan Purpose", "Personal Use"],
           ].map(([title, value], idx) => (
             <div className="py-3 flex justify-between text-sm" key={idx + 4}>
