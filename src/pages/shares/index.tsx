@@ -17,7 +17,7 @@ const ShareManagementPage = () => {
           buttons={[
             {
               icon: <MdAdd className="h-6 w-6" />,
-              label: "Record Share Transaction",
+              label: "Add new share type",
               onClick: () => {
                 open();
               },

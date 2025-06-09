@@ -1,4 +1,5 @@
-import { yupResolver } from "@hookform/resolvers/yup";import { Modal, Select } from "@mantine/core";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Modal, Select } from "@mantine/core";
 import { useForm } from "react-hook-form";
 import { shareTransactionSchema } from "../../schema/share.schema";
 import { FaSortDown } from "react-icons/fa";
@@ -16,7 +17,7 @@ const TransactionModal = ({
 }: {
   open: boolean;
   close: () => void;
-  id: string;
+  id: string | undefined;
 }) => {
   const {
     formState: { errors },
@@ -68,7 +69,7 @@ const TransactionModal = ({
             <Select
               label="Loan Purpose"
               placeholder="Select purpose"
-              data={["purchase", "sale"]}
+              data={["purchase", "sell"]}
               onChange={(value) => setValue("transactionType", value ?? "")}
               rightSection={<FaSortDown className=" mb-2 text-gray-500" />}
               error={errors["transactionType"]?.message ?? ""}
