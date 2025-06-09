@@ -1,5 +1,4 @@
-import { MdAdd, MdCalendarToday } from "react-icons/md";
-import { FaRegCircleCheck } from "react-icons/fa6";
+import { MdAdd, MdCalendarToday } from "react-icons/md";import { FaRegCircleCheck } from "react-icons/fa6";
 import { HiOutlineCash } from "react-icons/hi";
 import DashboardCard from "../../components/dashboard/DashboardCard";
 import ActiveLoansSection from "../../components/loan/ActiveLoansSection";
@@ -11,16 +10,30 @@ import Cookies from "js-cookie";
 import ApplyLoanModal from "../../components/loan/ApplyLoanModal";
 import { useDisclosure } from "@mantine/hooks";
 import { useQuery } from "@tanstack/react-query";
-import { ActiveLoanResponseBody } from "../../dtos/loans.dto";
+import {
+  ActiveLoanResponseBody,
+  LoansSummaryResponseBody,
+} from "../../dtos/loans.dto";
 import { api } from "../../api/api-client";
+import { Skeleton } from "@mantine/core";
+import PayInstallments from "../../components/loan/loan-details/PayInstallmentModal";
+import SummaryCard from "../../components/dashboard/SummaryCard";
 
 const Loan = () => {
   const [open, { toggle }] = useDisclosure(false);
   const role = Cookies.get("user");
-
   const { data: activeLaon } = useQuery({
     queryKey: ["active-loans"],
     queryFn: () => api.get<ActiveLoanResponseBody>(`${role}/loan/active-loans`),
+  });
+  const [openPayModal, { toggle: togglePayModal }] = useDisclosure(false);
+  const {
+    data: paymentHistory,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["loan-summary"],
+    queryFn: () => api.get<LoansSummaryResponseBody>(`${role}/loan/summary`),
   });
   return (
     <div className="flex flex-col gap-8">
@@ -43,34 +56,58 @@ const Loan = () => {
         />
       )}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">
-        <DashboardCard
-          icon={<HiOutlineCash className="h-6 w-6 text-white" />}
-          title="Current Loans"
-          value="₹15,000"
-          footerText="View details"
-          footerColor="text-blue-700 hover:text-blue-900"
-          bgColor={"bg-blue-700"}
-        />
-
-        <DashboardCard
-          icon={<FaRegCircleCheck className="h-6 w-6 text-white" />}
-          title="Completed Loans"
-          value="₹10,000"
-          footerText="View history"
-          footerColor="text-green-700 hover:text-green-900"
-          bgColor={"bg-green-700"}
-        />
-
-        <DashboardCard
-          icon={<MdCalendarToday className="h-6 w-6 text-white" />}
-          title="Next Installment Due"
-          value="₹1,250"
-          description="Due on 15 Nov, 2023"
-          footerText="Pay now"
-          footerAction={() => alert("Open installment modal")}
-          footerColor="text-yellow-500 hover:text-yellow-600"
-          bgColor={"bg-yellow-500"}
-        />
+        {isLoading || isError ? (
+          Array(3)
+            .fill(0)
+            .map((_, index) => <Skeleton key={index + 6} height={200} />)
+        ) : (
+          <>
+            <SummaryCard
+              icon={<FaRegCircleCheck className="h-6 w-6 text-white" />}
+              title="Total Disbursement"
+              amount={`	रु. ${
+                paymentHistory?.data?.data?.totalDisbursement ?? 0
+              }`}
+              color={"indigo"}
+            />{" "}
+            <SummaryCard
+              icon={<HiOutlineCash className="h-6 w-6 text-white" />}
+              title="Remaining Payment"
+              amount={`	रु. ${paymentHistory?.data?.data?.currentLoans ?? 0}`}
+              color="green"
+            />{" "}
+            <SummaryCard
+              icon={<HiOutlineCash className="h-6 w-6 text-white" />}
+              title="Total Fine"
+              amount={`	रु. ${paymentHistory?.data?.data?.totalFine ?? 0}`}
+              color={"yellow"}
+            />{" "}
+            <SummaryCard
+              icon={<HiOutlineCash className="h-6 w-6 text-white" />}
+              title="Total Interest"
+              amount={`	रु. ${paymentHistory?.data?.data?.totalInterest ?? 0}`}
+              color={"red"}
+            />
+            {role === "user" && (
+              <DashboardCard
+                icon={<MdCalendarToday className="h-6 w-6 text-white" />}
+                title="Next Installment Due"
+                value={`	रु. ${
+                  paymentHistory?.data?.data?.nextInstallment.amount ?? 0
+                }`}
+                description={`Due on ${
+                  paymentHistory?.data?.data?.nextInstallment.paymentDate.split(
+                    "T"
+                  )[0] ?? ""
+                }`}
+                footerText="Pay now"
+                footerAction={togglePayModal}
+                footerColor="text-yellow-500 hover:text-yellow-600"
+                bgColor={"bg-yellow-500"}
+              />
+            )}
+          </>
+        )}
       </div>
       <div className="w-full lg:flex gap-8">
         <div className={`${role === "admin" ? "w-full" : "w-full lg:w-2/3 "}`}>
@@ -91,6 +128,13 @@ const Loan = () => {
         )}
       </div>
       <ApplyLoanModal open={open} close={toggle} />
+      <PayInstallments
+        open={openPayModal}
+        close={toggle}
+        id={paymentHistory?.data?.data?.nextInstallment?.id ?? ""}
+        fine={paymentHistory?.data?.data?.nextInstallment?.fine ?? 0}
+        emi={paymentHistory?.data?.data?.nextInstallment?.amount ?? 0}
+      />
     </div>
   );
 };

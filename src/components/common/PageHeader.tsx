@@ -1,5 +1,4 @@
-const PageHeader = ({
-  subtitle,
+const PageHeader = ({  subtitle,
   title,
   buttons,
 }: {
@@ -12,7 +11,7 @@ const PageHeader = ({
   }>;
 }) => {
   return (
-    <div className="flex  flex-col items-center md:flex-row  justify-between w-full ">
+    <div className="flex  flex-col items-start md:items-center    md:flex-row  justify-between w-full ">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
         <p className="mt-1 text-sm text-gray-500">{subtitle}</p>
