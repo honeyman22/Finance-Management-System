@@ -37,3 +37,22 @@ export interface LoanTableData {
   totalInterest: number;
   receipt: string;
 }
+
+export interface LoansSummaryResponseBody {
+  message: string;
+  data: LoanSummary;
+}
+
+export interface LoanSummary {
+  currentLoans: number;
+  totalDisbursement: number;
+  totalPaidLoans: number;
+  totalFine: number;
+  totalInterest: number;
+  nextInstallment: {
+    id: string;
+    amount: number;
+    fine: number;
+    paymentDate: string;
+  };
+}

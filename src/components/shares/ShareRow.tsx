@@ -1,14 +1,15 @@
-import { useDisclosure } from "@mantine/hooks";
-import TransactionModal from "./TransactionModal";
+import { useDisclosure } from "@mantine/hooks";import TransactionModal from "./TransactionModal";
 import { MdAdd } from "react-icons/md";
 import { ActionIcon } from "@mantine/core";
 import { FiExternalLink } from "react-icons/fi";
 import { SharesListData } from "../../dtos/shares.dto";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const ShareRow = ({ share }: { share: SharesListData }) => {
   const [openPayModal, { toggle: togglePayModal }] = useDisclosure(false);
   const router = useNavigate();
+  const role = Cookies.get("user");
   return (
     <>
       <tr className=" text-sm text-gray-500 dark:text-gray-300">
@@ -29,9 +30,11 @@ const ShareRow = ({ share }: { share: SharesListData }) => {
           {share?.totalExpenses}
         </td>
         <td className="px-6 py-4 gap-2 flex items-center whitespace-nowrap ">
-          <ActionIcon onClick={togglePayModal}>
-            <MdAdd />
-          </ActionIcon>
+          {role === "admin" && (
+            <ActionIcon onClick={togglePayModal}>
+              <MdAdd />
+            </ActionIcon>
+          )}
           <ActionIcon onClick={() => router(`/shares/${share.id}`)}>
             <FiExternalLink />
           </ActionIcon>

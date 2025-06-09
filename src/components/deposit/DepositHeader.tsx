@@ -1,7 +1,9 @@
-import DashboardCard from "../dashboard/DashboardCard";import { MdAdd, MdCalendarToday } from "react-icons/md";
+import DashboardCard from "../dashboard/DashboardCard";
+import { MdAdd } from "react-icons/md";
 import { IoArrowUp } from "react-icons/io5";
 import { PiChartLineUpBold } from "react-icons/pi";
 import { Skeleton } from "@mantine/core";
+import SummaryCard from "../dashboard/SummaryCard";
 const DepositHeader = ({
   isLoading,
   totalDeposit,
@@ -35,33 +37,19 @@ const DepositHeader = ({
             footerText="View details"
             footerColor="text-blue-700 hover:text-blue-900"
             bgColor={"bg-blue-500"}
+            footerLink="/deposits"
             extra={
               <div className="text-sm flex gap-1 items-center font-medium text-green-500">
                 <IoArrowUp /> 9.1 %
               </div>
             }
           />
-          <DashboardCard
-            icon={<MdCalendarToday className="h-6 w-6 text-white" />}
-            title="Current Loan"
-            value="₹15,000"
-            footerText="Next due: Dec 1, 2023"
-            footerColor="text-gray-700 cursor-text "
-            bgColor={"bg-green-500"}
-          />
-          <DashboardCard
+
+          <SummaryCard
             icon={<PiChartLineUpBold className="h-6 w-6 text-white" />}
-            title="Savings Growth"
-            value={`₹ ${totalFine}`}
-            extra={
-              <span className="text-sm font-medium text-green-500">
-                + ₹12,000
-              </span>
-            }
-            footerText="See growth chart"
-            footerAction={() => alert("Open installment modal")}
-            footerColor="text-yellow-500 hover:text-yellow-600"
-            bgColor={"bg-purple-500"}
+            title="Total Fine"
+            amount={`₹ ${totalFine}`}
+            color="yellow"
           />
         </>
       )}
