@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";import { api } from "../../../api/api-client";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "../../../api/api-client";
 import { UserDashboardResponseBody } from "../../../dtos/dashboard.dto";
 import DashboardCard from "../DashboardCard";
 import { MdCalendarToday, MdCloudCircle, MdCreditCard } from "react-icons/md";
@@ -54,7 +55,7 @@ const UserDashBoardSummary = () => {
               dashboardSummary?.data?.data?.installement?.amount ?? 0
             }`}
             description={`Next installment due on ${
-              dashboardSummary?.data?.data?.installement?.date.split("T")[0]
+              dashboardSummary?.data?.data?.installement?.date?.split("T")[0]
             }`}
             footerText="Pay installment"
             footerAction={toggle}

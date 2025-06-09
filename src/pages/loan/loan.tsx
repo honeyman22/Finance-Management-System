@@ -88,7 +88,7 @@ const Loan = () => {
               amount={`	रु. ${paymentHistory?.data?.data?.totalInterest ?? 0}`}
               color={"red"}
             />
-            {role === "user" && (
+            {role === "user" && paymentHistory?.data?.data?.nextInstallment && (
               <DashboardCard
                 icon={<MdCalendarToday className="h-6 w-6 text-white" />}
                 title="Next Installment Due"
@@ -118,10 +118,10 @@ const Loan = () => {
           <div className="lg:w-1/3 flex flex-col mt-8 lg:mt-0 gap-8">
             <AmortizationSchedule
               monthlyInstallment={activeLaon?.data?.data[0]?.paymentmade}
-              remainingBalance={activeLaon?.data?.data[0].remainingPrinciple}
-              remainingPayments={activeLaon?.data?.data[0].remainingPrinciple}
-              totalInterest={activeLaon?.data?.data[0].remainingPrinciple}
-              totalLoanAmount={activeLaon?.data?.data[0].principleAmount}
+              remainingBalance={activeLaon?.data?.data[0]?.remainingPrinciple}
+              remainingPayments={activeLaon?.data?.data[0]?.remainingPrinciple}
+              totalInterest={activeLaon?.data?.data[0]?.remainingPrinciple}
+              totalLoanAmount={activeLaon?.data?.data[0]?.principleAmount}
             />
             <LoanCalculatorCard />
           </div>

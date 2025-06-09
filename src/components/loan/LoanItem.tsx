@@ -76,11 +76,13 @@ const LoanItem: React.FC<{ loan: ActiveLoan }> = ({ loan }) => {
           </div>
         </div>
       </div>
-      <LoanDetailsModal
-        activeLoan={loan}
-        open={openDetails}
-        toggle={toggleDetails}
-      />
+      {loan && (
+        <LoanDetailsModal
+          activeLoan={loan}
+          open={openDetails}
+          toggle={toggleDetails}
+        />
+      )}
     </li>
   );
 };
