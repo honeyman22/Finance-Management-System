@@ -118,13 +118,18 @@ const Loan = () => {
         </div>
         {role !== "admin" && (
           <div className="lg:w-1/3 flex flex-col mt-8 lg:mt-0 gap-8">
-            <AmortizationSchedule
-              monthlyInstallment={activeLaon?.data?.data[0]?.paymentmade}
-              remainingBalance={activeLaon?.data?.data[0]?.remainingPrinciple}
-              remainingPayments={activeLaon?.data?.data[0]?.remainingPrinciple}
-              totalInterest={activeLaon?.data?.data[0]?.remainingPrinciple}
-              totalLoanAmount={activeLaon?.data?.data[0]?.principleAmount}
-            />
+            {activeLaon?.data?.data[0]?.remainingPrinciple === 0 && (
+              <AmortizationSchedule
+                monthlyInstallment={activeLaon?.data?.data[0]?.paymentmade}
+                remainingBalance={activeLaon?.data?.data[0]?.remainingPrinciple}
+                remainingPayments={
+                  activeLaon?.data?.data[0]?.remainingPrinciple
+                }
+                totalInterest={activeLaon?.data?.data[0]?.remainingPrinciple}
+                totalLoanAmount={activeLaon?.data?.data[0]?.principleAmount}
+              />
+            )}
+
             <LoanCalculatorCard />
           </div>
         )}
