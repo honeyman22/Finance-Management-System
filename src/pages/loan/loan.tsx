@@ -1,4 +1,5 @@
-import { MdAdd, MdCalendarToday } from "react-icons/md";import { FaRegCircleCheck } from "react-icons/fa6";
+import { MdAdd, MdCalendarToday } from "react-icons/md";
+import { FaRegCircleCheck } from "react-icons/fa6";
 import { HiOutlineCash } from "react-icons/hi";
 import DashboardCard from "../../components/dashboard/DashboardCard";
 import ActiveLoansSection from "../../components/loan/ActiveLoansSection";
@@ -21,7 +22,8 @@ import SummaryCard from "../../components/dashboard/SummaryCard";
 
 const Loan = () => {
   const [open, { toggle }] = useDisclosure(false);
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   const { data: activeLaon } = useQuery({
     queryKey: ["active-loans"],
     queryFn: () => api.get<ActiveLoanResponseBody>(`${role}/loan/active-loans`),

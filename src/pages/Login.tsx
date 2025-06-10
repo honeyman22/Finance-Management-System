@@ -21,7 +21,13 @@ const Login = () => {
     mutationFn: async (data: { email: string; password: string }) => {
       const response = await api.post("/auth/login", data);
       const myData = response.data?.data;
-      Cookies.set("user", myData?.role);
+      Cookies.set(
+        "brotherFinance",
+        JSON.stringify({
+          token: myData?.token,
+          role: myData?.role,
+        })
+      );
     },
     onSuccess: () => {
       router("/");
@@ -87,6 +93,26 @@ const Login = () => {
           >
             {isPending ? <Loader size={16} /> : " Sign in"}
           </button>
+        </div>
+        <div className="demo-section">
+          <div className="admin-demo">
+            <h3 className="text-sm font-bold text-gray-600">
+              Admin Demo Credentials
+            </h3>
+            <p className="text-sm text-gray-600">
+              Email: admin@brotherfinance.com
+            </p>
+            <p className="text-sm text-gray-600">Password: Admin@123</p>
+          </div>
+          <div className="user-demo">
+            <h3 className="text-sm font-bold text-gray-600">
+              User Demo Credentials
+            </h3>
+            <p className="text-sm text-gray-600">
+              Email: demouser@brotherfinance.com
+            </p>
+            <p className="text-sm text-gray-600">Password: Test@123</p>
+          </div>
         </div>
       </form>
     </div>

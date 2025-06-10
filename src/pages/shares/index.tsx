@@ -1,4 +1,5 @@
-import { MdAdd } from "react-icons/md";import PageHeader from "../../components/common/PageHeader";
+import { MdAdd } from "react-icons/md";
+import PageHeader from "../../components/common/PageHeader";
 import ShareSummary from "../../components/shares/ShareSummary";
 import { useDisclosure } from "@mantine/hooks";
 import ShareTable from "../../components/shares/ShareTable";
@@ -7,7 +8,8 @@ import Cookies from "js-cookie";
 
 const ShareManagementPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   return (
     <div className="w-full flex flex-col gap-8">
       {role === "admin" ? (

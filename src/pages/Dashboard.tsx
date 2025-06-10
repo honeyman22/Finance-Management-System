@@ -1,4 +1,5 @@
-import React from "react";import RecentActivity from "../components/dashboard/RecentActivities";
+import React from "react";
+import RecentActivity from "../components/dashboard/RecentActivities";
 import DashboardSummary from "../components/dashboard/summary/DashboardSummary";
 import PendingApprovals from "../components/dashboard/PendingApprovals";
 import ShareTransactionTable from "../components/dashboard/ShareTransactionTable";
@@ -17,7 +18,8 @@ import ApplyLoanModal from "../components/loan/ApplyLoanModal";
 import CreateUserModal from "../components/users/CreateUserModal";
 
 const Login: React.FC = () => {
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   const {
     data: loans,
     isLoading,
