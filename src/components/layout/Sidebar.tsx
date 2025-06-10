@@ -1,8 +1,8 @@
-import { useEffect } from "react";import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 const AdminSideBar = [
   { label: "Dashboard", icon: "🏠", href: "/" },
-  { label: "Deposits", icon: "💰", href: "/deposits" },
   { label: "Loans", icon: "🏦", href: "/loans" },
   { label: "Users", icon: "👥", href: "/users" },
   { label: "Shares", icon: "📈", href: "/shares" },

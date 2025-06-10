@@ -1,5 +1,4 @@
-import { Pagination, Skeleton } from "@mantine/core";
-import React from "react";
+import { Pagination, Skeleton } from "@mantine/core";import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
 import { DepositTableDataRoot } from "../../dtos/deposits.dto";
@@ -35,7 +34,8 @@ const DepositTableHeader = () => {
 };
 const DepositHistoryTable: React.FC = () => {
   const [page, setPage] = React.useState(1);
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   const {
     data: deposits,
     isLoading,
