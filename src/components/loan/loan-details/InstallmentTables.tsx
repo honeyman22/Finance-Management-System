@@ -1,5 +1,4 @@
-import { useDisclosure } from "@mantine/hooks";
-import Cookies from "js-cookie";
+import { useDisclosure } from "@mantine/hooks";import Cookies from "js-cookie";
 import ImageViewModal from "../../common/ImageViewModal";
 import { PaymentHistory } from "../../../dtos/loan-details.dto";
 import { ActionIcon } from "@mantine/core";
@@ -98,7 +97,8 @@ const InstallmentTables = ({
 }: {
   installments: PaymentHistory[];
 }) => {
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
 
   const userHeader = [
     "Payment Date",

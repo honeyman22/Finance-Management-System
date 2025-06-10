@@ -11,7 +11,8 @@ import { BsEye } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 const PaymentHistory: React.FC = () => {
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   const router = useNavigate();
   const [openImage, { toggle: toggleOpenImage }] = useDisclosure(false);
   const { data: allLoansData } = useQuery({

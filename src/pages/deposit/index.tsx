@@ -1,7 +1,4 @@
-import PageHeader from "../../components/common/PageHeader";
-import { useNavigate } from "react-router-dom";
-import DepositReminder from "../../components/deposit/DepositReminder";
-import DepositSummary from "../../components/deposit/DepositSummary";
+import PageHeader from "../../components/common/PageHeader";import DepositSummary from "../../components/deposit/DepositSummary";
 import AnnualDepositProgressCard from "../../components/deposit/AnnualDepositProgressCard";
 import DepositHeader from "../../components/deposit/DepositHeader";
 import DepositHistoryTable from "../../components/deposit/DepositTable";
@@ -10,8 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
 import { Skeleton } from "@mantine/core";
 const DepositPage = () => {
-  const navigate = useNavigate();
-
   const { data: summary, isLoading } = useQuery<DepositSummaryResponseBody>({
     queryKey: ["deposits-summary"],
     queryFn: async () => {
@@ -32,7 +27,7 @@ const DepositPage = () => {
         totalFine={summary?.data?.totalFines ?? 0}
       />
       <div className="w-full lg:flex gap-8">
-        <div className="lg:w-2/3">
+        <div className="w-full lg:w-2/3">
           <DepositHistoryTable />
         </div>
         <div className="lg:w-1/3 flex flex-col mt-8 lg:mt-0 gap-8">
@@ -51,14 +46,6 @@ const DepositPage = () => {
             </>
           ) : (
             <>
-              <DepositReminder
-                title="December Deposit"
-                subtitle="Your upcoming deposit schedule"
-                amount={1000}
-                dueDate="Dec 1, 2023"
-                daysLeft={15}
-                onPayNow={() => navigate("/deposits/add-deposit")}
-              />
               <DepositSummary
                 memberSince="November 2022"
                 totalDeposits={summary?.data?.numberOfDeposits ?? 0}

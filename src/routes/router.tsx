@@ -1,8 +1,9 @@
-import { createBrowserRouter, redirect } from "react-router-dom";import Layout from "../components/layout/Layout";
+import { createBrowserRouter, redirect } from "react-router-dom";
+import Layout from "../components/layout/Layout";
 import Cookies from "js-cookie";
 const userLogged = () => {
-  const token = Cookies.get("user");
-  if (!token) return false;
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  if (!brotherFinance?.token) return false;
   return true;
 };
 

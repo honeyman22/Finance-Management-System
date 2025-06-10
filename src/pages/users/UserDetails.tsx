@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";import PageHeader from "../../components/common/PageHeader";
+import { useQuery } from "@tanstack/react-query";
+import PageHeader from "../../components/common/PageHeader";
 import ProfileCard from "../../components/users/ProfileCard";
 import { api } from "../../api/api-client";
 import { Skeleton } from "@mantine/core";
@@ -156,6 +157,14 @@ const UserDetails = () => {
   };
   return (
     <div className="flex flex-col gap-5">
+      <div className="">
+        <button
+          onClick={() => window.history.back()}
+          className="inline-flex h-10 items-center   px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-500"
+        >
+          Go Back
+        </button>
+      </div>
       <div>
         <PageHeader
           title={`${userdetails?.data?.data?.fullName}'s Details`}

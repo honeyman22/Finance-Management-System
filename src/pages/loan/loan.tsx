@@ -1,4 +1,5 @@
-import { MdAdd, MdCalendarToday } from "react-icons/md";import { FaRegCircleCheck } from "react-icons/fa6";
+import { MdAdd, MdCalendarToday } from "react-icons/md";
+import { FaRegCircleCheck } from "react-icons/fa6";
 import { HiOutlineCash } from "react-icons/hi";
 import DashboardCard from "../../components/dashboard/DashboardCard";
 import ActiveLoansSection from "../../components/loan/ActiveLoansSection";
@@ -21,7 +22,8 @@ import SummaryCard from "../../components/dashboard/SummaryCard";
 
 const Loan = () => {
   const [open, { toggle }] = useDisclosure(false);
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   const { data: activeLaon } = useQuery({
     queryKey: ["active-loans"],
     queryFn: () => api.get<ActiveLoanResponseBody>(`${role}/loan/active-loans`),
@@ -116,13 +118,18 @@ const Loan = () => {
         </div>
         {role !== "admin" && (
           <div className="lg:w-1/3 flex flex-col mt-8 lg:mt-0 gap-8">
-            <AmortizationSchedule
-              monthlyInstallment={activeLaon?.data?.data[0]?.paymentmade}
-              remainingBalance={activeLaon?.data?.data[0]?.remainingPrinciple}
-              remainingPayments={activeLaon?.data?.data[0]?.remainingPrinciple}
-              totalInterest={activeLaon?.data?.data[0]?.remainingPrinciple}
-              totalLoanAmount={activeLaon?.data?.data[0]?.principleAmount}
-            />
+            {activeLaon?.data?.data[0]?.remainingPrinciple === 0 && (
+              <AmortizationSchedule
+                monthlyInstallment={activeLaon?.data?.data[0]?.paymentmade}
+                remainingBalance={activeLaon?.data?.data[0]?.remainingPrinciple}
+                remainingPayments={
+                  activeLaon?.data?.data[0]?.remainingPrinciple
+                }
+                totalInterest={activeLaon?.data?.data[0]?.remainingPrinciple}
+                totalLoanAmount={activeLaon?.data?.data[0]?.principleAmount}
+              />
+            )}
+
             <LoanCalculatorCard />
           </div>
         )}

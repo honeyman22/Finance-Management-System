@@ -1,7 +1,8 @@
 import { MdMenu, MdNotifications } from "react-icons/md";
 import Cookies from "js-cookie";
 const Header = ({ setOpen }: { setOpen: () => void }) => {
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   return (
     <header className="bg-gray-800  shadow-sm px-4 py-3 h-20 flex items-center justify-between">
       <div className="flex items-center space-x-4">

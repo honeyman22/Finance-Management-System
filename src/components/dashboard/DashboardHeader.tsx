@@ -1,5 +1,4 @@
-import { FC } from "react";
-import { MdAdd, MdCreditCard } from "react-icons/md";
+import { FC } from "react";import { MdAdd, MdCreditCard } from "react-icons/md";
 import Cookies from "js-cookie";
 interface DashboardHeaderProps {
   userName: string;
@@ -12,7 +11,8 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
   onOpenDepositModal,
   onOpenLoanModal,
 }) => {
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   return (
     <div className="flex  flex-col md:flex-row  justify-between w-full ">
       <div>

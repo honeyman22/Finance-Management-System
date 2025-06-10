@@ -49,10 +49,19 @@ const ShareDetailsPage = () => {
     queryKey: ["share-details", id],
     queryFn: () => api.get<ShareDetailsResponseBody>(`/shares/${id}`),
   });
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <div className="flex flex-col gap-6">
+      <div className="">
+        <button
+          onClick={() => window.history.back()}
+          className="inline-flex h-10 items-center   px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-500"
+        >
+          Go Back
+        </button>
+      </div>
       {role === "admin" ? (
         <PageHeader
           title={shareDetails?.data?.data?.shareName ?? "Share" + "deatils"}

@@ -1,4 +1,5 @@
-import { useDisclosure } from "@mantine/hooks";import TransactionModal from "./TransactionModal";
+import { useDisclosure } from "@mantine/hooks";
+import TransactionModal from "./TransactionModal";
 import { MdAdd } from "react-icons/md";
 import { ActionIcon } from "@mantine/core";
 import { FiExternalLink } from "react-icons/fi";
@@ -9,7 +10,8 @@ import Cookies from "js-cookie";
 const ShareRow = ({ share }: { share: SharesListData }) => {
   const [openPayModal, { toggle: togglePayModal }] = useDisclosure(false);
   const router = useNavigate();
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   return (
     <>
       <tr className=" text-sm text-gray-500 dark:text-gray-300">

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 const AdminSideBar = [
   { label: "Dashboard", icon: "🏠", href: "/" },
-  { label: "Deposits", icon: "💰", href: "/deposits" },
   { label: "Loans", icon: "🏦", href: "/loans" },
   { label: "Users", icon: "👥", href: "/users" },
   { label: "Shares", icon: "📈", href: "/shares" },
@@ -33,11 +32,14 @@ const Sidebar = ({
   }, [setOpen]);
 
   const handleLogout = () => {
+    Cookies.remove("brotherFinance");
+    Cookies.remove("token");
     setTimeout(() => {
       router("/login");
     }, 2000);
   };
-  const role = Cookies.get("user");
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  const role = brotherFinance?.role;
   const sideBar = role === "admin" ? AdminSideBar : UserSideBar;
   return (
     <nav
