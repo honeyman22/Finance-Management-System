@@ -27,7 +27,10 @@ const RegisterShareModal = ({
       await api.post(`/shares`, data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["shares-list"] });
+      queryClient.invalidateQueries({
+        queryKey: ["shares-list"],
+      });
+      
       close();
       reset();
       toast.success("Share created successfully");

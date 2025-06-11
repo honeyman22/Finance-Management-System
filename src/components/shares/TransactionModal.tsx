@@ -1,5 +1,4 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Modal, Select } from "@mantine/core";
+import { yupResolver } from "@hookform/resolvers/yup";import { Modal, Select } from "@mantine/core";
 import { useForm } from "react-hook-form";
 import { shareTransactionSchema } from "../../schema/share.schema";
 import { FaSortDown } from "react-icons/fa";
@@ -43,7 +42,9 @@ const TransactionModal = ({
     },
     onSuccess: () => {
       close();
-      queryClient.invalidateQueries({ queryKey: ["shares-list"] });
+      queryClient.invalidateQueries({
+        queryKey: ["shares-list", "share-summary", "share-details"],
+      });
       toast.success("Share transaction recorded successfully");
     },
     onError: (error: any) => {
