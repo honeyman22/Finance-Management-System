@@ -1,4 +1,5 @@
-import { Modal } from "@mantine/core";import CustomDropzone from "../common/CustomDropzone";
+import { Loader, Modal } from "@mantine/core";
+import CustomDropzone from "../common/CustomDropzone";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { acceptRejectLoanSchema } from "../../schema/loan.schema";
@@ -30,7 +31,7 @@ const ApprovedRejectLoanModal = ({
 
   const queryClient = useQueryClient();
 
-  const { mutate: acceptReject } = useMutation({
+  const { mutate: acceptReject, isPending } = useMutation({
     mutationFn: async (data: any) => {
       const formData = new FormData();
       formData.append("image", data.receipt);
@@ -78,8 +79,9 @@ const ApprovedRejectLoanModal = ({
         <button
           onClick={handleSubmit((data) => acceptReject(data))}
           className="text-white w-full bg-green-500 rounded-md px-4 h-10"
+          disabled={isPending}
         >
-          {status}
+          {isPending ? <Loader size={16} /> : status}
         </button>
       </div>
     </Modal>

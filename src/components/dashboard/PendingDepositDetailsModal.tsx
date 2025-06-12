@@ -1,4 +1,4 @@
-import { Modal } from "@mantine/core";
+import { Loader, Modal } from "@mantine/core";
 import { PendingApprovels } from "../../dtos/dashboard.dto";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../../api/api-client";
@@ -16,7 +16,7 @@ const PendingDepositDetailsModal = ({
   type: string;
 }) => {
   const queryClient = useQueryClient();
-  const { mutate: approve } = useMutation({
+  const { mutate: approve, isPending: approvePending } = useMutation({
     mutationKey: ["pending-approval-requests"],
     mutationFn: () =>
       type === "deposit"
@@ -37,7 +37,7 @@ const PendingDepositDetailsModal = ({
       toast.error(error?.response?.data?.message ?? "Something went wrong");
     },
   });
-  const { mutate: reject } = useMutation({
+  const { mutate: reject, isPending } = useMutation({
     mutationKey: ["pending-approval-requests"],
     mutationFn: () =>
       type === "deposit"
@@ -113,21 +113,23 @@ const PendingDepositDetailsModal = ({
         <button
           type="button"
           aria-label="reject"
+          disabled={isPending || approvePending}
           onClick={() => {
             reject();
           }}
           className="bg-gray-600 flex-1  text-white rounded-md px-4 py-2"
         >
-          Reject
+          {isPending ? <Loader size={"16px"} /> : "Reject"}
         </button>
         <button
           aria-label="approve"
           onClick={() => {
             approve();
           }}
+          disabled={isPending || approvePending}
           className="bg-blue-600  flex-1 text-white rounded-md px-4 py-2"
         >
-          Accept
+          {approvePending ? <Loader size={"16px"} /> : "Approve"}
         </button>
       </div>
     </Modal>

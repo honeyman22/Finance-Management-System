@@ -1,4 +1,4 @@
-import { yupResolver } from "@hookform/resolvers/yup";import { Modal, Select } from "@mantine/core";
+import { yupResolver } from "@hookform/resolvers/yup";import { Loader, Modal, Select } from "@mantine/core";
 import { useForm } from "react-hook-form";
 import { shareTransactionSchema } from "../../schema/share.schema";
 import { FaSortDown } from "react-icons/fa";
@@ -28,7 +28,7 @@ const TransactionModal = ({
 
   const queryClient = useQueryClient();
 
-  const { mutate: recordTransaction } = useMutation({
+  const { mutate: recordTransaction, isPending } = useMutation({
     mutationFn: async (data: any) => {
       const transactionFormData = new FormData();
       transactionFormData.append("image", data.receipt);
@@ -134,8 +134,11 @@ const TransactionModal = ({
           >
             Cancel
           </button>
-          <button className="text-white flex-1 bg-blue-600 rounded-md px-4 h-10">
-            Save Transaction
+          <button
+            disabled={isPending}
+            className="text-white flex-1 bg-blue-600 rounded-md px-4 h-10"
+          >
+            {isPending ? <Loader size={16} /> : "Record Transaction"}
           </button>
         </div>
       </form>
