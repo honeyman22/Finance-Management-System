@@ -1,5 +1,4 @@
-import { Modal, Select, Tooltip } from "@mantine/core";
-import CustomDropzone from "../common/CustomDropzone";
+import { Loader, Modal, Select, Tooltip } from "@mantine/core";import CustomDropzone from "../common/CustomDropzone";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -30,7 +29,7 @@ const PayDepositModal = ({
 
   const queryClient = useQueryClient();
 
-  const { mutate: payDeposit } = useMutation({
+  const { mutate: payDeposit, isPending } = useMutation({
     mutationFn: async (data: any) => {
       const depositFormData = new FormData();
       depositFormData.append("image", data.receipt);
@@ -114,8 +113,11 @@ const PayDepositModal = ({
           errors={errors}
         />
 
-        <button className="text-white mt-4 bg-green-500 rounded-md px-4 h-10">
-          Submit Application
+        <button
+          disabled={isPending}
+          className="text-white mt-4 bg-green-500 rounded-md px-4 h-10"
+        >
+          {isPending ? <Loader size={"md"} /> : "   Submit Application"}
         </button>
       </form>
     </Modal>

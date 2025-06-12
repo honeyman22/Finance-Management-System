@@ -1,6 +1,7 @@
-import { yupResolver } from "@hookform/resolvers/yup";import { registerSchema } from "../../schema/auth.schema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "../../schema/auth.schema";
 import { useForm } from "react-hook-form";
-import { Modal } from "@mantine/core";
+import { Loader, Modal } from "@mantine/core";
 import CustomInput from "../common/CustomInput";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
@@ -15,7 +16,7 @@ const CreateUserModal = ({ open, onClose }: any) => {
   } = useForm({
     resolver: yupResolver(registerSchema),
   });
-  const { mutate: registerUser } = useMutation({
+  const { mutate: registerUser, isPending } = useMutation({
     mutationFn: async (data: any) => {
       await api.post(`/admin/user`, data);
     },
@@ -78,9 +79,10 @@ const CreateUserModal = ({ open, onClose }: any) => {
           </button>
           <button
             aria-label="submit"
+            disabled={isPending}
             className="bg-blue-600  flex-1 text-white rounded-md px-4 py-2"
           >
-            Yes
+            {isPending ? <Loader size={16} /> : "Yes"}
           </button>
         </div>
       </form>

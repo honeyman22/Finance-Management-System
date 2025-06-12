@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Modal } from "@mantine/core";
+import { Loader, Modal } from "@mantine/core";
 import { useForm } from "react-hook-form";
 import { registerShareSchema } from "../../schema/share.schema";
 import CustomInput from "../common/CustomInput";
@@ -22,7 +22,7 @@ const RegisterShareModal = ({
 
   const queryClient = useQueryClient();
 
-  const { mutate: createShare } = useMutation({
+  const { mutate: createShare, isPending } = useMutation({
     mutationFn: async (data: any) => {
       await api.post(`/shares`, data);
     },
@@ -30,7 +30,7 @@ const RegisterShareModal = ({
       queryClient.invalidateQueries({
         queryKey: ["shares-list"],
       });
-      
+
       close();
       reset();
       toast.success("Share created successfully");
@@ -70,8 +70,11 @@ const RegisterShareModal = ({
           >
             Cancel
           </button>
-          <button className="text-white flex-1 bg-blue-600 rounded-md px-4 h-10">
-            Save Transaction
+          <button
+            disabled={isPending}
+            className="text-white flex-1 bg-blue-600 rounded-md px-4 h-10"
+          >
+            {isPending ? <Loader /> : " Save Transaction"}
           </button>
         </div>
       </form>

@@ -1,6 +1,7 @@
-import { yupResolver } from "@hookform/resolvers/yup";import { applyForLoanSchema } from "../../schema/loan.schema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { applyForLoanSchema } from "../../schema/loan.schema";
 import { useForm } from "react-hook-form";
-import { Modal, Select } from "@mantine/core";
+import { Loader, Modal, Select } from "@mantine/core";
 import { FaSortDown } from "react-icons/fa";
 import CustomInput from "../common/CustomInput";
 import { useMutation } from "@tanstack/react-query";
@@ -28,7 +29,7 @@ const ApplyLoanModal = ({
     },
   });
 
-  const { mutate: applyForLoan } = useMutation({
+  const { mutate: applyForLoan, isPending } = useMutation({
     mutationFn: async (data: any) => {
       await api.post("/user/loan/apply", {
         amount: parseInt(data.loanAmount),
@@ -115,9 +116,10 @@ const ApplyLoanModal = ({
           </button>
           <button
             type="submit"
+            disabled={isPending}
             className="text-white flex-1 bg-blue-600 rounded-md px-4 h-10"
           >
-            Apply
+            {isPending ? <Loader size={"md"} /> : "  Apply"}
           </button>
         </div>
       </form>
