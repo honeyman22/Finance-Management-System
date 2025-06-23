@@ -1,7 +1,6 @@
 export interface LonDetailsResponseBody {  message: string;
   data: Data;
 }
-
 export interface Data {
   userDetails: UserDetails;
   loanDetails: LoanDetails;
@@ -42,4 +41,19 @@ export interface PaymentHistory {
   receipt: any;
   paidPrinciple: number;
   isPaid: boolean;
+}
+
+export interface SettelmetGetResponseBody {
+  message: string;
+  data: SettelmetGetData;
+}
+
+export interface SettelmetGetData {
+  id?: string;
+  loanId: string;
+  interest: number;
+  paidAmount: number;
+  principleAmount: number;
+  receipt: any;
+  status: string;
 }

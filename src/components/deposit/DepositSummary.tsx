@@ -1,5 +1,4 @@
-import React from "react";interface DepositSummaryProps {
-  memberSince: string;
+import React from "react";interface DepositSummaryProps {  memberSince: string;
   totalDeposits: number;
   amountDeposited: number;
   depositRegularity: "Excellent" | "Good" | "Average" | "Poor";
@@ -37,7 +36,10 @@ const DepositSummary: React.FC<DepositSummaryProps> = ({
             label="Total Deposits"
             value={`${totalDeposits} months`}
           />
-          <SummaryRow label="Amount Deposited" value={`₹ ${amountDeposited}`} />
+          <SummaryRow
+            label="Amount Deposited"
+            value={`रू ${amountDeposited}`}
+          />
           <SummaryRow
             label="Deposit Regularity"
             value={

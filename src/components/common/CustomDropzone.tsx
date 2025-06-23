@@ -7,6 +7,7 @@ const CustomDropzone = ({
   id,
   label,
   errors,
+  ischangeable = true,
 }: {
   image?: any;
   onDrop?: any;
@@ -14,6 +15,7 @@ const CustomDropzone = ({
   id: string;
   label: string;
   errors: any;
+  ischangeable?: boolean;
 }) => {
   return (
     <div className="flex flex-col gap-1">
@@ -27,12 +29,14 @@ const CustomDropzone = ({
             alt="images"
             className="object-cover h-full w-full"
           />
-          <button
-            className="absolute top-2 right-2 bg-white rounded-full p-2"
-            onClick={() => onDrop([])}
-          >
-            <MdClose size={20} />
-          </button>
+          {ischangeable && (
+            <button
+              className="absolute top-2 right-2 bg-white rounded-full p-2"
+              onClick={() => onDrop([])}
+            >
+              <MdClose size={20} />
+            </button>
+          )}
         </div>
       ) : (
         <Dropzone

@@ -1,5 +1,4 @@
-import { useDisclosure } from "@mantine/hooks";import { DepositData } from "../../dtos/deposits.dto";
-import PayDepositModal from "./PayDepositModal";
+import { useDisclosure } from "@mantine/hooks";import { DepositData } from "../../dtos/deposits.dto";import PayDepositModal from "./PayDepositModal";
 import ImageViewModal from "../common/ImageViewModal";
 const statusStyles: Record<string, string> = {
   approved: "bg-green-100 text-green-800",
@@ -18,7 +17,7 @@ const DepositTableRow = ({ deposit }: { deposit: DepositData }) => {
           {deposit.depositDate.split("T")[0]}
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-          {deposit.amount}
+          रू {deposit.amount}
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
           {deposit.fine}
