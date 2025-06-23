@@ -111,6 +111,7 @@ const PayDepositModal = ({
           id="receipt"
           label="Upload Receipt"
           errors={errors}
+          
         />
 
         <button
