@@ -1,5 +1,4 @@
-import React from "react";
-import RecentActivity from "../components/dashboard/RecentActivities";
+import React from "react";import RecentActivity from "../components/dashboard/RecentActivities";
 import DashboardSummary from "../components/dashboard/summary/DashboardSummary";
 import PendingApprovals from "../components/dashboard/PendingApprovals";
 import ShareTransactionTable from "../components/dashboard/ShareTransactionTable";
@@ -16,6 +15,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { MdAdd } from "react-icons/md";
 import ApplyLoanModal from "../components/loan/ApplyLoanModal";
 import CreateUserModal from "../components/users/CreateUserModal";
+import PendingSettelementSection from "../components/dashboard/pending-settelment/PendingSettelementSection";
 
 const Login: React.FC = () => {
   const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
@@ -59,9 +59,6 @@ const Login: React.FC = () => {
         }
       />
       {role === "user" ? <UserDashBoardSummary /> : <DashboardSummary />}
-      <RecentActivity />
-      <Barcharts />
-      <ShareTransactionTable />
       {role === "admin" && (
         <>
           <PendingApprovals />
@@ -70,8 +67,12 @@ const Login: React.FC = () => {
           ) : loans?.data?.data?.length === 0 ? null : (
             <PendingLoansCard loans={loans?.data?.data} />
           )}
+          <PendingSettelementSection />
         </>
       )}
+      <RecentActivity />
+      <Barcharts />
+      <ShareTransactionTable />
       <ApplyLoanModal open={open} close={toggle} />{" "}
       <CreateUserModal open={openUserModal} onClose={toggleUserModal} />
     </div>

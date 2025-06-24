@@ -1,4 +1,5 @@
-import * as Yup from "yup";export const applyForLoanSchema = Yup.object().shape({
+import * as Yup from "yup";
+export const applyForLoanSchema = Yup.object().shape({
   loanAmount: Yup.string().required("Loan amount is required."),
   loanTerm: Yup.string().required("Loan term is required."),
   loanType: Yup.string().required("Loan type is required."),
@@ -28,4 +29,8 @@ export const settlementSchema = Yup.object().shape({
   interest: Yup.number().required("Interest is required."),
   paidAmount: Yup.number().required("Paid amount is required."),
   principleAmount: Yup.number().required("Principle amount is required."),
+});
+
+export const rejectSettelmentSchema = Yup.object().shape({
+  notes: Yup.string().required("Notes are required."),
 });
