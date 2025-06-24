@@ -4,6 +4,7 @@ export interface LonDetailsResponseBody {  message: string;
 export interface Data {
   userDetails: UserDetails;
   loanDetails: LoanDetails;
+  settlement?: Settlement;
   paymentHistory: PaymentHistory[];
 }
 
@@ -55,5 +56,15 @@ export interface SettelmetGetData {
   paidAmount: number;
   principleAmount: number;
   receipt: any;
+  status: string;
+}
+
+export interface Settlement {
+  id: string;
+  paidAmount: number;
+  principleAmount: number;
+  interest: number;
+  receipt: string;
+  createdAt: string;
   status: string;
 }

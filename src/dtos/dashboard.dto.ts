@@ -105,3 +105,28 @@ export interface Installement {
   id: string;
   fine: number;
 }
+
+export interface PendingSettelementResponseBody {
+  message: string;
+  data: PendingSettelement[];
+}
+
+export interface PendingSettelement {
+  id: string;
+  paidAmount: number;
+  loanId: string;
+  principleAmount: number;
+  interest: number;
+  createdAt: string;
+  receipt: string;
+  loan: Loan;
+}
+
+export interface Loan {
+  user: User;
+}
+
+export interface User {
+  fullName: string;
+  image?: string;
+}

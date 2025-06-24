@@ -13,6 +13,7 @@ import { Skeleton } from "@mantine/core";
 import { MdAdd } from "react-icons/md";
 import { useDisclosure } from "@mantine/hooks";
 import SettelmentModal from "../../components/loan/loan-details/SettelmentModal";
+import SettelmentCard from "../../components/loan/loan-details/SettelmentCard";
 
 const LoanDetails = () => {
   const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
@@ -48,11 +49,13 @@ const LoanDetails = () => {
         title="Loan Details"
         subtitle="View and manage your loan details."
         buttons={
-          settelment?.data?.data?.status !== "approved"
+          settelment?.data?.data?.status !== "approved" && role === "user"
             ? [
                 {
                   icon: <MdAdd className="h-6 w-6" />,
-                  label: "Settel Now",
+                  label: loandetails?.data?.data?.settlement
+                    ? "Edit settlement"
+                    : "Settle Now",
                   onClick: () => toggleSettelment(),
                 },
               ]
@@ -68,8 +71,15 @@ const LoanDetails = () => {
         loandetails?.data?.data?.loanDetails && (
           <>
             <LoanInfo activeLoan={loandetails.data.data.loanDetails} />
+            {loandetails.data.data.settlement && (
+              <SettelmentCard settelement={loandetails.data.data.settlement} />
+            )}
             <InstallmentTables
               installments={loandetails?.data?.data?.paymentHistory}
+              settelement={
+                loandetails?.data?.data?.settlement?.status === "approved" ||
+                false
+              }
             />
           </>
         )

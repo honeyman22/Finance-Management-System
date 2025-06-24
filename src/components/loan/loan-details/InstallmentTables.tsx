@@ -8,15 +8,21 @@ import PayInstallments from "./PayInstallmentModal";
 const TableRow = ({
   payment,
   role,
+  settelement,
 }: {
   payment: PaymentHistory;
   role: string | undefined;
+  settelement: boolean;
 }) => {
   const [openImage, { toggle: toggleOpenImage }] = useDisclosure(false);
   const [openModal, { toggle }] = useDisclosure(false);
   return (
     <>
-      <tr>
+      <tr
+        className={`${
+          settelement && payment.status !== "paid" && "bg-gray-300"
+        }`}
+      >
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
           {payment.paymentDate.split("T")[0]}
         </td>
@@ -94,8 +100,10 @@ const TableRow = ({
 };
 const InstallmentTables = ({
   installments,
+  settelement,
 }: {
   installments: PaymentHistory[];
+  settelement: boolean;
 }) => {
   const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
   const role = brotherFinance?.role;
@@ -150,7 +158,12 @@ const InstallmentTables = ({
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {installments?.map((payment) => (
-              <TableRow key={payment.id} payment={payment} role={role} />
+              <TableRow
+                key={payment.id}
+                payment={payment}
+                settelement={settelement}
+                role={role}
+              />
             ))}
           </tbody>
         </table>
