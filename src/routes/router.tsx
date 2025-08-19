@@ -1,5 +1,4 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
-import Layout from "../components/layout/Layout";
+import { createBrowserRouter, redirect } from "react-router-dom";import Layout from "../components/layout/Layout";
 import Cookies from "js-cookie";
 const userLogged = () => {
   const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
@@ -102,6 +101,13 @@ export const router = createBrowserRouter([
         async lazy() {
           const Profile = await import("../pages/Profile");
           return { Component: Profile.default };
+        },
+      },
+      {
+        path: "/checkout",
+        async lazy() {
+          const Checkout = await import("../components/stripe/Checkout");
+          return { Component: Checkout.default };
         },
       },
       {
