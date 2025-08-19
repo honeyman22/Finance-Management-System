@@ -1,5 +1,7 @@
-import { useDisclosure } from "@mantine/hooks";import { DepositData } from "../../dtos/deposits.dto";import PayDepositModal from "./PayDepositModal";
+import { useDisclosure } from "@mantine/hooks";import { DepositData } from "../../dtos/deposits.dto";
+import PayDepositModal from "./PayDepositModal";
 import ImageViewModal from "../common/ImageViewModal";
+import { useNavigate } from "react-router-dom";
 const statusStyles: Record<string, string> = {
   approved: "bg-green-100 text-green-800",
   pending: "bg-yellow-100 text-yellow-800",
@@ -7,6 +9,7 @@ const statusStyles: Record<string, string> = {
 };
 const DepositTableRow = ({ deposit }: { deposit: DepositData }) => {
   const [openPayModal, { toggle: togglePayModal }] = useDisclosure(false);
+  const router = useNavigate();
   const [openImageModal, { toggle: toggleOpenImageModal }] =
     useDisclosure(false);
   return (
@@ -44,7 +47,9 @@ const DepositTableRow = ({ deposit }: { deposit: DepositData }) => {
             </button>
           ) : (
             <button
-              onClick={togglePayModal}
+              onClick={() => {
+                router(`/checkout`);
+              }}
               className="bg-indigo-600 text-sm px-4 py-0.5 rounded-md text-white  hover:bg-indigo-900 mr-2"
             >
               Pay Now
