@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "@mantine/core";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Login = () => {
   const {
@@ -16,6 +17,11 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(loginSchema),
   });
+// Test API connection for free api so it can be heated before login api call
+  useEffect(() => {
+    api.get("")
+  }, []);
+
   const router = useNavigate();
   const { mutate: loginUser, isPending } = useMutation({
     mutationFn: async (data: { email: string; password: string }) => {
