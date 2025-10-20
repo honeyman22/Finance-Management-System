@@ -5,7 +5,20 @@ const userLogged = () => {
   if (!brotherFinance?.token) return false;
   return true;
 };
+// Loader for protected routes
+export const protectedLoader = () => {
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  if (!brotherFinance?.token) return redirect("/login");
+  return null;
+};
 
+// Loader for login page
+export const guestLoader = () => {
+  const brotherFinance = JSON.parse(Cookies.get("brotherFinance") ?? "{}");
+  if (brotherFinance?.token) return redirect("/");
+  return null;
+};
+console.log("Router loaded", userLogged());
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +31,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        loader: protectedLoader,
         async lazy() {
           const Dashboard = await import("../pages/Dashboard");
           return { Component: Dashboard.default };
@@ -135,6 +149,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
+    loader:guestLoader,
     async lazy() {
       const Login = await import("../pages/Login");
       return { Component: Login.default };
@@ -142,6 +157,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/reset-password",
+    loader:guestLoader,
     async lazy() {
       const ResetPassword = await import("../pages/ResetPassword");
       return { Component: ResetPassword.default };
